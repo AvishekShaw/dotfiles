@@ -184,3 +184,5 @@ alias jpmr=" xdg-open ~/Desktop/YogaKshema/JPMR.mp4"
 alias coldw="google-chrome https://www.youtube.com/playlist\?list\=PL3H6z037pboGWTxs3xGP7HRGrQ5dOQdG"
 alias np="xdg-open ~/pCloudDrive/numpy.pdf"
 alias plt="xdg-open /home/avishek/pCloudDrive/Matplotlib.pdf"
+
+plugins=(zsh-autosuggestions)
