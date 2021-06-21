@@ -169,3 +169,6 @@ alias tmns="tmux new -t"
 alias tmas="tmux a -t"
 alias tmks="tmuz kill-session -t"
 
+alias gl='git log --all --graph --decorate'
+alias gca='git commit -a --stat -v'
+alias gs='git status'
