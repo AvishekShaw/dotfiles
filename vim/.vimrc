@@ -1,3 +1,11 @@
+
+call plug#begin()
+Plug 'itchyny/lightline.vim'          " Better Status Bar
+Plug 'mhinz/vim-startify'             " Better start screen
+Plug 'scrooloose/nerdtree'            " File explorer
+Plug 'w0rp/ale'                        " Linting engine
+Plug 'maximbaz/lightline-ale'          " Lightline + Ale
+call plug#end()
 " Comments in Vimscript start with a "
 " If you open this file in Vim, it'll be syntax highlighted for you.
 " Vim is based on Vi. Setting `nocompatible` switches from the default

@@ -170,5 +170,6 @@ alias tmas="tmux a -t"
 alias tmks="tmuz kill-session -t"
 
 alias gl='git log --all --graph --decorate'
-alias gca='git commit -a --stat -v'
+alias gc='git commit --stat -v -m'
 alias gs='git status'
+alias gaa='git add .'
