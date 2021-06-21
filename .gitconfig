@@ -3,3 +3,5 @@
 	name = AvishekShaw
 [core]
 	editor = vim
+[credential]
+	helper = cache
