@@ -32,7 +32,7 @@ export PROMPT='%(!.%{%F{yellow}%}.)$USER@%{$fg[white]%}%M ${ret_status} %{$fg[cy
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 # Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+ CASE_SENSITIVE="true"
 
 # Uncomment the following line to use hyphen-insensitive completion.
 # Case-sensitive completion must be off. _ and - will be interchangeable.
@@ -118,19 +118,10 @@ source $ZSH/oh-my-zsh.sh
 
 alias lab='ssh abhishek@10.24.46.40'
 alias obs='~/Desktop/Obsidian & > obsfile.txt'
-alias yt='google-chrome http://www.youtube.com'
-alias medi='google-chrome https://www.youtube.com/playlist?list=PLYhzQnJJJ2ifZBSk4XlyuYNHOTKsZ23yE'
-alias blog='google-chrome https://www.lesswrong.com/ ; google-chrome https://fs.blog/blog/'
-alias mail='google-chrome https://www.gmail.com; google-chrome https://outlook.office.com/mail/' 
-alias news='google-chrome https://www.thehindu.com/ ; google-chrome https://www.economist.com/'
-alias lpg='xdg-open /home/avishek/pCloudDrive/LinuxPocketGuide/Linux\ Pocket\ Guide.pdf'
-alias ww2='google-chrome https://www.dailymotion.com/playlist/x60q8h'
-alias pyt='xdg-open /home/avishek/pCloudDrive/PyTorch.pdf'
 alias fd='fdfind'
 
 source /home/avishek/.config/broot/launcher/bash/br
 alias mv="mv -i"
-alias ms="google-chrome https://www.youtube.com/playlist?list=PLyzOVJj3bHQuloKGG59rS43e29ro7I57J"
 export VISUAL=vim
 export EDITOR=vim
 
@@ -165,35 +156,16 @@ unset __conda_setup
 mcd(){
 	mkdir -p "$1"
 	cd "$1"
-	echo "$$"
-	echo "$0"
-	echo "$1"
-}
-
-tmas(){
-	tmux a -t "$1"
-}
-
-tmns(){
-	tmux new -t "$1"
-}
-
-tmks(){
-	tmux kill-session -t "$1"
-}
-
-google(){
-	google-chrome "? $1"
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-alias jpmr=" xdg-open ~/Desktop/YogaKshema/JPMR.mp4"
-alias coldw="google-chrome https://www.youtube.com/playlist\?list\=PL3H6z037pboGWTxs3xGP7HRGrQ5dOQdG"
-alias np="xdg-open ~/pCloudDrive/numpy.pdf"
-alias plt="xdg-open /home/avishek/pCloudDrive/Matplotlib.pdf"
 
 plugins=(zsh-autosuggestions)
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+alias tmns="tmux new -t"
+alias tmas="tmux a -t"
+alias tmks="tmuz kill-session -t"
+
