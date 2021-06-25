@@ -173,3 +173,8 @@ alias gl='git log --all --graph --decorate'
 alias gc='git commit --stat -v -m'
 alias gs='git status'
 alias gaa='git add .'
+
+install(){
+	sudo apt install "$1"
+	echo "sudo apt install $1" >> ~/.pkg.sh && echo "install instructions added to ~/.pkg.sh"
+}
