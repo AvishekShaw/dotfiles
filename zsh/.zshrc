@@ -175,5 +175,5 @@ alias gs='git status'
 alias gaa='git add .'
 
 install(){
-	sudo apt install "$1" && echo "sudo apt install $1" >> ~/.pkg.sh && echo "install instructions added to ~/.pkg.sh"
+	sudo apt install "$1" && echo "sudo apt install $1 && echo "package $1 installed"" >> ~/.pkg.sh && echo "install instructions added to ~/.pkg.sh"
 }
