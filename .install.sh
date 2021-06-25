@@ -1,9 +1,12 @@
 # First the business of the shell. 
 # ---------------------------------
+sudo apt install zsh							# Install zsh
 chsh -s /usr/bin/zsh && echo "zsh made the default shell"		# First change the default shell to zsh
-#sh -c "$(curl -fsSL https://raw.githubusercontent.com\
-#/ohmyzsh/ohmyzsh/master/tools/install.sh)" && echo \
-#"oh-my-zsh installed"							# install oh-my-zsh
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com\
+/ohmyzsh/ohmyzsh/master/tools/install.sh)" && echo \
+"oh-my-zsh installed"							# install oh-my-zsh
+
 ln -sf ~/.dotfiles/zsh/.zshrc ~/.zshrc && echo "soft \
 link to zshrc created"  
 
@@ -18,3 +21,9 @@ ln -sf ~/.dotfiles/.gitconfig ~/.gitconfig && echo "soft \
 link to gitconfig created"  						# create link to the gitconfig
 ln -sf ~/.dotfiles/.matplotlibrc ~/.config/matplotlib/\
 .matplotlibrc && echo "soft link to matplotlibrc created" 		# create link to matplotlibrc
+
+# Additional information
+# --------------------------------------------
+
+echo "For anki and calibre installation run the following: sudo apt-get install libxcb-xinerama0"
+echo "Additional softwares to install for a fresh computer : Chrome, Teams, Anki and Calibre"
