@@ -5,6 +5,13 @@ Plug 'mhinz/vim-startify'             " Better start screen
 Plug 'scrooloose/nerdtree'            " File explorer
 Plug 'w0rp/ale'                        " Linting engine
 Plug 'maximbaz/lightline-ale'          " Lightline + Ale
+Plug 'machakann/vim-highlightedyank'
+Plug 'airblade/vim-gitgutter'         " Git gutter
+
+" Colorschemes
+Plug 'morhetz/gruvbox'
+Plug 'patstockwell/vim-monokai-tasty'
+Plug 'sainnhe/sonokai'
 call plug#end()
 " Comments in Vimscript start with a "
 " If you open this file in Vim, it'll be syntax highlighted for you.
