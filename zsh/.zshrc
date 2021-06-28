@@ -181,5 +181,6 @@ install(){
 autoload -Uz compinit && compinit
 
 alarm(){
-	sleep "$1" && cvlc ~/Music/christmas_music.mp3
+	termdown "$1" && cvlc ~/Music/christmas_music.mp3
 }
+
