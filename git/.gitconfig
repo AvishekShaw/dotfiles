@@ -3,5 +3,6 @@
 	name = AvishekShaw
 [core]
 	editor = vim
+	excludesfile = /home/avishek/.dotfiles/git/.gitignore_global
 [credential]
 	helper = cache
