@@ -173,7 +173,9 @@ alias gl='git log --all --graph --decorate'
 alias gc='git commit --stat -v -m'
 alias gs='git status'
 alias gaa='git add .'
+alias gca='git commit -a --stat -v -m'
 
 install(){
 	sudo apt install "$1" && echo "sudo apt install $1 && echo "package $1 installed"" >> ~/.pkg.sh && echo "install instructions added to ~/.pkg.sh"
 }
+autoload -Uz compinit && compinit
