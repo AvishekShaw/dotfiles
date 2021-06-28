@@ -179,3 +179,7 @@ install(){
 	sudo apt install "$1" && echo "sudo apt install $1 && echo "package $1 installed"" >> ~/.pkg.sh && echo "install instructions added to ~/.pkg.sh"
 }
 autoload -Uz compinit && compinit
+
+alarm(){
+	sleep "$1" && cvlc ~/Music/christmas_music.mp3
+}
