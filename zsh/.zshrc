@@ -184,3 +184,4 @@ alarm(){
 	termdown "$1" && cvlc ~/Music/christmas_music.mp3
 }
 
+alias off='poweroff'
