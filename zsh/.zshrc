@@ -184,4 +184,14 @@ alarm(){
 	termdown "$1" && cvlc ~/Music/christmas_music.mp3
 }
 
+ex(){
+	"$@" && echo "$@" >> ~/training.txt
+}
+com(){
+	echo "$@" >> ~/training.txt
+}
 alias off='poweroff'
+export PATH=$PATH:/home/avishek/spark/bin
+export PATH=$PATH:/home/avishek/jdk/bin
+
+
