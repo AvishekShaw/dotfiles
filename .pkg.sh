@@ -6,3 +6,4 @@ sudo apt install tldr && echo package tldr installed
 sudo apt install iftop && echo package iftop installed
 sudo apt install iotop && echo package iotop installed
 sudo apt install at && echo package at installed
+sudo apt install powerline && echo package powerline installed

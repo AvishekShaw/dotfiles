@@ -85,7 +85,11 @@ export PROMPT='%(!.%{%F{yellow}%}.)$USER@%{$fg[white]%}%M ${ret_status} %{$fg[cy
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+	zsh-autosuggestions	
+	git
+	zsh-syntax-highlighting
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -160,7 +164,6 @@ mcd(){
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-plugins=(zsh-autosuggestions)
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
@@ -194,4 +197,4 @@ alias off='poweroff'
 export PATH=$PATH:/home/avishek/spark/bin
 export PATH=$PATH:/home/avishek/jdk/bin
 
-
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240,bold,underline"
