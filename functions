@@ -1,0 +1,14 @@
+#!/bin/bash
+
+mcd(){
+	mkdir -p "$1"
+	cd "$1"
+}
+
+install(){
+	sudo apt install "$1" && echo "sudo apt install $1 && echo "package $1 installed"" >> ~/.dotfiles/.pkg.sh && echo "install instructions added to ~/.dotfiles/.pkg.sh"
+}
+
+alarm(){
+	termdown "$1" && cvlc ~/Music/christmas_music.mp3
+}

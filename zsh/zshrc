@@ -140,10 +140,6 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-mcd(){
-	mkdir -p "$1"
-	cd "$1"
-}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -152,22 +148,8 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-install(){
-	sudo apt install "$1" && echo "sudo apt install $1 && echo "package $1 installed"" >> ~/.dotfiles/.pkg.sh && echo "install instructions added to ~/.dotfiles/.pkg.sh"
-}
 autoload -Uz compinit && compinit
 
-alarm(){
-	termdown "$1" && cvlc ~/Music/christmas_music.mp3
-}
-
-ex(){
-	"$@" && echo "$@" >> ~/training.txt
-}
-com(){
-	echo "$@" >> ~/training.txt
-}
-bindkey "^O" clear-screen
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240,bold,underline"
 export VISUAL=vim
 export EDITOR=vim
@@ -176,3 +158,4 @@ export PATH=$PATH:/home/avishek/jdk/bin
 
 #source aliases
 source ~/dotfiles/alias
+source ~/dotfiles/functions
