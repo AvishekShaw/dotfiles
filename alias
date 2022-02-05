@@ -1,0 +1,35 @@
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# ls
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# tmux
+alias tmns="tmux new -t"
+alias tmas="tmux a -t"
+alias tmks="tmuz kill-session -t"
+
+# git
+alias gl='git log --all --graph --decorate'
+alias gc='git commit --stat -v -m'
+alias gs='git status'
+alias gaa='git add .'
+alias gca='git commit -a --stat -v -m'
+
+# system
+alias off='poweroff'
+alias clock='watch -n 0.1 "date +"%H:%M:%S" | toilet -f bigmono9"'
+alias fd='fdfind'
+alias mv="mv -i"

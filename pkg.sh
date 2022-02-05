@@ -7,3 +7,8 @@ sudo apt install iftop && echo package iftop installed
 sudo apt install iotop && echo package iotop installed
 sudo apt install at && echo package at installed
 sudo apt install powerline && echo package powerline installed
+sudo apt install fd-find && echo package fd-find installed
+sudo apt install ffmpeg && echo package ffmpeg installed
+sudo apt install tmuxinator && echo package tmuxinator installed
+sudo apt install toilet && echo package toilet installed
+sudo apt install brave-browser && echo package brave-browser installed

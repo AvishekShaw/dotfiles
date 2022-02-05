@@ -15,6 +15,10 @@ export ZSH="/home/avishek/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+
+
+#ZSH_THEME="dracula"
+#ZSH_THEME="eastwood"
 ZSH_THEME="robbyrussell"
 #ZSH_THEME="nebirhos"
 #ZSH_THEME=""
@@ -120,29 +124,8 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #personal aliases
 
-alias lab='ssh abhishek@10.24.46.40'
-alias obs='~/Desktop/Obsidian & > obsfile.txt'
-alias fd='fdfind'
-
 source /home/avishek/.config/broot/launcher/bash/br
-alias mv="mv -i"
-export VISUAL=vim
-export EDITOR=vim
 
-# enable color support of ls and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/home/avishek/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
@@ -168,15 +151,6 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-alias tmns="tmux new -t"
-alias tmas="tmux a -t"
-alias tmks="tmuz kill-session -t"
-
-alias gl='git log --all --graph --decorate'
-alias gc='git commit --stat -v -m'
-alias gs='git status'
-alias gaa='git add .'
-alias gca='git commit -a --stat -v -m'
 
 install(){
 	sudo apt install "$1" && echo "sudo apt install $1 && echo "package $1 installed"" >> ~/.dotfiles/.pkg.sh && echo "install instructions added to ~/.dotfiles/.pkg.sh"
@@ -193,8 +167,12 @@ ex(){
 com(){
 	echo "$@" >> ~/training.txt
 }
-alias off='poweroff'
+bindkey "^O" clear-screen
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240,bold,underline"
+export VISUAL=vim
+export EDITOR=vim
 export PATH=$PATH:/home/avishek/spark/bin
 export PATH=$PATH:/home/avishek/jdk/bin
 
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=240,bold,underline"
+#source aliases
+source ~/dotfiles/alias
