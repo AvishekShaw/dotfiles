@@ -7,8 +7,14 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com\
 /ohmyzsh/ohmyzsh/master/tools/install.sh)" && echo \
 "oh-my-zsh installed"							# install oh-my-zsh
 
-ln -sf ~/.dotfiles/zsh/.zshrc ~/.zshrc && echo "soft \
-link to zshrc created"  
+if [[ -f ~/.zshrc ]]
+then
+	do mv ~/.zshrc ~/.zshrc.old && echo \
+		".zshrc moved to .zshrc.old"
+done
+
+ln -sf ~/dotfiles/zsh/zshrc ~/.zshrc && echo "soft \                    
+link to zshrc created"                                                  # create symlink to zshrc
 
 # check jose's file for inspiration
 #ln -sf ~/.dotfiles/zsh/.p10k.zsh ~/.p10k.zsh && echo\
