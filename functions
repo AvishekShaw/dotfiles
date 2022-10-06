@@ -12,3 +12,7 @@ install(){
 alarm(){
 	termdown "$1" && cvlc ~/Music/christmas_music.mp3
 }
+
+brightness(){
+	xrandr --output HDMI-1 --brightness "$1"
+}
