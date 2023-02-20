@@ -34,3 +34,6 @@ alias off='poweroff'
 alias clock='watch -n 0.1 "date +"%H:%M:%S" | toilet -f bigmono9"'
 alias fd='fdfind'
 alias mv="mv -i"
+
+# cd
+alias code='cd ~/Code'

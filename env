@@ -2,3 +2,5 @@ export SPARK_HOME="~/spark"
 export JAVA_HOME="~/jdk"
 export PATH=$JAVA_HOME/bin:$PATH
 export PATH=$SPARK_HOME/bin:$PATH
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"

@@ -160,3 +160,5 @@ export PATH=$PATH:/home/avishek/jdk/bin
 source ~/dotfiles/alias
 source ~/dotfiles/functions
 source ~/dotfiles/env
+alias obsidian=Obsidian
+alias obs=Obsidian

@@ -16,3 +16,7 @@ alarm(){
 brightness(){
 	xrandr --output HDMI-1 --brightness "$1"
 }
+
+gamma(){
+	xrandr --output HDMI-1 --gamma "$1":"$2":"$3"
+}
