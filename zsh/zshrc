@@ -157,8 +157,7 @@ export PATH=$PATH:/home/avishek/spark/bin
 export PATH=$PATH:/home/avishek/jdk/bin
 
 #source aliases
-source ~/dotfiles/alias
-source ~/dotfiles/functions
-source ~/dotfiles/env
-alias obsidian=Obsidian
+source ~/Code/dotfiles/alias
+source ~/Code/dotfiles/functions
+source ~/Code/dotfiles/env
 alias obs=Obsidian
