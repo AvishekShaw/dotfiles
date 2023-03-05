@@ -20,3 +20,7 @@ brightness(){
 gamma(){
 	xrandr --output HDMI-1 --gamma "$1":"$2":"$3"
 }
+
+dwnld(){
+	wget --page-requisites --convert-links --adjust-extension --content-disposition -P ~/Documents/Web ${1}
+}
