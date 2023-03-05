@@ -22,5 +22,5 @@ gamma(){
 }
 
 dwnld(){
-	wget --page-requisites --convert-links --adjust-extension --content-disposition -P ~/Documents/Web ${1}
+	bash -c "wget --page-requisites --convert-links --adjust-extension --content-disposition -P ~/Documents/Web ${1}" && echo "Downloaded the file ${1}"
 }
