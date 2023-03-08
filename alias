@@ -28,6 +28,7 @@ alias gs='git status'
 alias gaa='git add .'
 alias gca='git commit -a --stat -v -m'
 alias gpom='git push origin master'
+alias x='clear'
 
 # system
 alias off='poweroff'
