@@ -38,3 +38,5 @@ alias mv="mv -i"
 
 # cd
 alias code='cd ~/Code'
+
+alias vscode='/usr/bin/code'
