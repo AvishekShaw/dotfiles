@@ -38,11 +38,10 @@ alias mv="mv -i"
 
 # cd
 alias code='cd ~/Code'
-
 alias vscode='/usr/bin/code'
 
 # sync
-alias nsync='bash ~/Code/Shell/sync_obsidian.sh'
+alias ns='bash ~/Code/Shell/sync_obsidian.sh'
 alias expsync='bash ~/Code/expense_tracker/sync.sh'
 
 alias obs=Obsidian
