@@ -1,1 +1,0 @@
-/home/avishek/Code/dotfiles/zsh/p10k.zsh
