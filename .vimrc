@@ -13,6 +13,7 @@ Plug 'morhetz/gruvbox'
 Plug 'patstockwell/vim-monokai-tasty'
 Plug 'sainnhe/sonokai'
 call plug#end()
+
 " Comments in Vimscript start with a "
 " If you open this file in Vim, it'll be syntax highlighted for you.
 " Vim is based on Vi. Setting `nocompatible` switches from the default
