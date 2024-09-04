@@ -2,6 +2,7 @@
 # Determine the environment and set variables accordingly
 if [ "$(uname)" = "Darwin" ]; then
     # macOS
+    echo "from darwin"
     NOTES_DIR="$HOME/Documents/notes"
     GIT_CMD="git"
 elif [ -d "~Documents" ]; then
