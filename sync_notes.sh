@@ -14,6 +14,7 @@ else
 fi
 
 # Change to the notes directory
+echo $NOTES_DIR
 cd "$NOTES_DIR" || exit 1
 
 # Add all .md, .png, and .pdf files
