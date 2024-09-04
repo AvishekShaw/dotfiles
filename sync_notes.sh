@@ -1,13 +1,12 @@
-#!/bin/bash
-
+#!/bin/sh
 # Determine the environment and set variables accordingly
-if [[ "$OSTYPE" == "darwin"* ]]; then
+if [ "$(uname)" = "Darwin" ]; then
     # macOS
     NOTES_DIR="$HOME/Documents/notes"
     GIT_CMD="git"
-elif [[ -d ~Documents ]]; then
+elif [ -d "$HOME/Documents" ]; then
     # a-shell
-    NOTES_DIR="~Documents"
+    NOTES_DIR="$HOME/Documents"
     GIT_CMD="lg2"
 else
     echo "Unsupported environment"
@@ -18,16 +17,16 @@ fi
 cd "$NOTES_DIR" || exit 1
 
 # Add all .md, .png, and .pdf files
-find . -type f \( -name "*.md" -o -name "*.png" -o -name "*.pdf" \) -print0 | xargs -0 $GIT_CMD add
+find . -type f \( -name "*.md" -o -name "*.png" -o -name "*.pdf" \) -print0 | xargs -0 "$GIT_CMD" add
 
 # Add deleted files
-$GIT_CMD ls-files --deleted -z | xargs -0 $GIT_CMD add
+"$GIT_CMD" ls-files --deleted -z | xargs -0 "$GIT_CMD" add
 
 # Commit changes
-$GIT_CMD commit -m "Sync on $(date)"
+"$GIT_CMD" commit -m "Sync on $(date)"
 
 # Pull changes from remote
-$GIT_CMD pull origin master
+"$GIT_CMD" pull origin master
 
 # Push changes to remote
-$GIT_CMD push origin master
+"$GIT_CMD" push origin master
