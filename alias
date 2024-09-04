@@ -37,11 +37,11 @@ alias fd='fdfind'
 alias mv="mv -i"
 
 # cd
-alias code='cd ~/Code'
+alias code='cd $HOME/Code'
 alias vscode='/usr/bin/code'
 
 # sync
-alias ns='bash ~/Code/Shell/sync_obsidian.sh'
-alias expsync='bash ~/Code/expense_tracker/sync.sh'
+alias ns='bash $HOME/Code/backup/sync_obsidian.sh'
+alias expsync='bash $HOME/Code/expense_tracker/sync.sh'
 
 alias obs=Obsidian

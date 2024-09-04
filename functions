@@ -31,5 +31,5 @@ dwnld_all(){
 
 exp(){
 	cd ~/Code/expense_tracker
-	python main.py "$@"
+	python3 main.py "$@"
 }
