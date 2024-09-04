@@ -1,4 +1,4 @@
-[user]
+[global]
 	email = 47551320+AvishekShaw@users.noreply.github.com
 	name = AvishekShaw
 [core]
@@ -6,3 +6,5 @@
 	excludesfile = ~/.gitignore_global
 [credential]
 	helper = cache
+[pull]
+	rebase = true
