@@ -5,9 +5,10 @@ if [ "$(whoami)" = "egregious" ]; then
     # macOS
     NOTES_DIR="$HOME/Documents/notes"
     GIT_CMD="git"
+    cd "$NOTES_DIR" || exit 1
 elif [ "$(whoami)" = "mobile" ]; then
     # a-shell on iOS
-    NOTES_DIR="~Documents"
+    # NOTES_DIR="~Documents"
     GIT_CMD="lg2"
 else
     echo "Unsupported environment"
@@ -15,7 +16,6 @@ else
 fi
 
 # Change to the notes directory
-cd "$NOTES_DIR" || exit 1
 
 # Add all .md, .png, and .pdf files
 find . -type f \( -name "*.md" -o -name "*.png" -o -name "*.pdf" \) -print0 | xargs -0 "$GIT_CMD" add
