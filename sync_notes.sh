@@ -7,7 +7,7 @@ if [ "$(whoami)" = "egregious" ]; then
     GIT_CMD="git"
 elif [ "$(whoami)" = "mobile" ]; then
     # a-shell on iOS
-    NOTES_DIR="$HOME/Documents"
+    NOTES_DIR="~Documents"
     GIT_CMD="lg2"
 else
     echo "Unsupported environment"
