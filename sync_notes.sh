@@ -4,9 +4,9 @@ if [ "$(uname)" = "Darwin" ]; then
     # macOS
     NOTES_DIR="$HOME/Documents/notes"
     GIT_CMD="git"
-elif [ -d "$HOME/Documents" ]; then
+elif [ -d "~Documents" ]; then
     # a-shell
-    NOTES_DIR="$HOME/Documents"
+    NOTES_DIR="~Documents"
     GIT_CMD="lg2"
 else
     echo "Unsupported environment"
