@@ -1,17 +1,33 @@
-#! /bin/bash
+#!/bin/bash
 
-OBS_HOME=$HOME/Documents/notes
-cd $OBS_HOME
+# Determine the environment and set variables accordingly
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    # macOS
+    NOTES_DIR="$HOME/Documents/notes"
+    GIT_CMD="git"
+elif [[ -d ~Documents ]]; then
+    # a-shell
+    NOTES_DIR="~Documents"
+    GIT_CMD="lg2"
+else
+    echo "Unsupported environment"
+    exit 1
+fi
 
-echo "-----------------starting sync of obsidian notes---------------"
-echo $(date +"%D %T") 
+# Change to the notes directory
+cd "$NOTES_DIR" || exit 1
 
-find . -type f \( -name "*.md" -o -name "*.png" -o -name "*.pdf" \) -print0 | xargs -0 git add
-git ls-files --deleted -z | xargs -0 git add
+# Add all .md, .png, and .pdf files
+find . -type f \( -name "*.md" -o -name "*.png" -o -name "*.pdf" \) -print0 | xargs -0 $GIT_CMD add
 
-git commit -m "updated $(date)"
+# Add deleted files
+$GIT_CMD ls-files --deleted -z | xargs -0 $GIT_CMD add
 
-git pull origin master
-git push origin master
+# Commit changes
+$GIT_CMD commit -m "Sync on $(date)"
 
-echo "-------------------------------------------------------"
+# Pull changes from remote
+$GIT_CMD pull origin master
+
+# Push changes to remote
+$GIT_CMD push origin master

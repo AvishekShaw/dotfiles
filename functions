@@ -5,28 +5,8 @@ mcd(){
 	cd "$1"
 }
 
-install(){
-	sudo apt install "$1" && echo "sudo apt install $1 && echo "package $1 installed"" >> ~/.dotfiles/.pkg.sh && echo "install instructions added to ~/.dotfiles/.pkg.sh"
-}
-
 alarm(){
 	termdown "$1" && cvlc ~/Music/christmas_music.mp3
-}
-
-brightness(){
-	xrandr --output HDMI-1 --brightness "$1"
-}
-
-gamma(){
-	xrandr --output HDMI-1 --gamma "$1":"$2":"$3"
-}
-
-dwnld(){
-	bash -c "wget --page-requisites --convert-links --adjust-extension --content-disposition -P ~/Documents/Web ${1}" && echo "Downloaded the file ${1}"
-}
-
-dwnld_all(){
-	bash -c "wget --page-requisites --recursive --convert-links --adjust-extension --content-disposition -P ~/Documents/Web ${1}" && echo "Downloaded the file ${1}"
 }
 
 exp(){
