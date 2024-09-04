@@ -1,13 +1,13 @@
 #!/bin/sh
-# Determine the environment and set variables accordingly
-if [ "$(uname)" = "Darwin" ]; then
+
+# Determine the environment based on the output of whoami
+if [ "$(whoami)" = "egregious" ]; then
     # macOS
-    echo "from darwin"
     NOTES_DIR="$HOME/Documents/notes"
     GIT_CMD="git"
-elif [ -d "~Documents" ]; then
-    # a-shell
-    NOTES_DIR="~Documents"
+elif [ "$(whoami)" = "mobile" ]; then
+    # a-shell on iOS
+    NOTES_DIR="$HOME/Documents"
     GIT_CMD="lg2"
 else
     echo "Unsupported environment"
@@ -15,7 +15,6 @@ else
 fi
 
 # Change to the notes directory
-echo $NOTES_DIR
 cd "$NOTES_DIR" || exit 1
 
 # Add all .md, .png, and .pdf files
