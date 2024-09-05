@@ -51,16 +51,39 @@ cd "$NOTES_DIR" || exit 1
 
 # Add all files
 "$GIT_CMD" add . && echo "All files added"
-# dashes 50
+dashes 50
 
 # Commit changes
 "$GIT_CMD" commit -m "Sync from $(whoami)" && echo "Changes committed"
 dashes 50
 
+
+if [ "$(whoami)" = "egregious" ]; then
+    # Pull changes from remote
+    "$GIT_CMD" pull origin master && echo "Changes pulled"
+    dashes 50
+
+    # Push changes to remote
+    "$GIT_CMD" push origin master && echo "Changes pushed"
+    dashes 50
+elif [ "$(whoami)" = "mobile" ]; then
+
+   # Pull changes from remote
+    "$GIT_CMD" pull origin && echo "Changes pulled"
+    dashes 50
+
+    # Push changes to remote
+    "$GIT_CMD" push origin && echo "Changes pushed"
+    dashes 50
+else
+    echo "Unsupported environment or directory"
+    exit 1
+fi
+
 # Pull changes from remote
-"$GIT_CMD" pull origin master && echo "Changes pulled"
-dashes 50
+# "$GIT_CMD" pull origin master && echo "Changes pulled"
+# dashes 50
 
 # Push changes to remote
-"$GIT_CMD" push origin master && echo "Changes pushed"
-dashes 50
+# "$GIT_CMD" push origin master && echo "Changes pushed"
+# dashes 50
