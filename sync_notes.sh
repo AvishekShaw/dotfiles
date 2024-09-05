@@ -17,7 +17,7 @@ if [ "$(whoami)" = "egregious" ]; then
 if [ "$(whoami)" = "mobile" ] && [ "$PWD" = "~Documents" ]; then
 
     # a-shell on iOS
-    NOTES_DIR="~Documents/notes"
+    NOTES_DIR="notes"
     # GIT_CMD="lg2"
     echo "This is iOS environment"
 else
