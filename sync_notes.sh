@@ -17,7 +17,7 @@ elif [ "$(whoami)" = "mobile" ]; then
     # a-shell on iOS
     # NOTES_DIR="~Documents"
     GIT_CMD="lg2"
-    echo "This is iOS environment. Syncing notes from $NOTES_DIR"
+    echo "This is iOS environment"
 else
     echo "Unsupported environment"
     exit 1
