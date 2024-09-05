@@ -47,7 +47,7 @@ cd "$NOTES_DIR" || exit 1
 dashes 50
 
 # Commit changes
-"$GIT_CMD" commit -m "Sync on $(date)" && echo "Changes committed"
+"$GIT_CMD" commit -m "Sync from $(whoami)" && echo "Changes committed"
 dashes 50
 
 # Pull changes from remote
