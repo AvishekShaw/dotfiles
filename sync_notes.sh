@@ -14,7 +14,7 @@ if [ "$(whoami)" = "egregious" ]; then
     # GIT_CMD="git"
     echo "This is darwin environment. Syncing notes from $NOTES_DIR"
 # elif [ "$(whoami)" = "mobile" ]; then
-if [ "$(whoami)" = "mobile" ] && [ "$PWD" = "~Documents" ]; then
+elif [ "$(whoami)" = "mobile" ] && [ "$PWD" = "~Documents" ]; then
 
     # a-shell on iOS
     NOTES_DIR="notes"
