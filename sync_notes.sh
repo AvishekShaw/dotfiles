@@ -1,9 +1,16 @@
 #!/bin/sh
 
+# dashes() {
+#     local length=$1
+#     local dashes=$(printf "%*s" $length "")
+#     echo "${dashes// /-}"
+# }
+
+
 dashes() {
     local length=$1
     local dashes=$(printf "%*s" $length "")
-    echo "${dashes// /-}"
+    echo "${dashes}" | tr ' ' '-'
 }
 
 GIT_CMD="git"
@@ -44,7 +51,7 @@ cd "$NOTES_DIR" || exit 1
 
 # Add all files
 "$GIT_CMD" add . && echo "All files added"
-dashes 50
+# dashes 50
 
 # Commit changes
 "$GIT_CMD" commit -m "Sync from $(whoami)" && echo "Changes committed"
