@@ -13,13 +13,15 @@ if [ "$(whoami)" = "egregious" ]; then
     NOTES_DIR="$HOME/Documents/notes"
     # GIT_CMD="git"
     echo "This is darwin environment. Syncing notes from $NOTES_DIR"
-elif [ "$(whoami)" = "mobile" ]; then
+# elif [ "$(whoami)" = "mobile" ]; then
+if [ "$(whoami)" = "mobile" ] && [ "$PWD" = "~Documents" ]; then
+
     # a-shell on iOS
     NOTES_DIR="~Documents/notes"
     # GIT_CMD="lg2"
     echo "This is iOS environment"
 else
-    echo "Unsupported environment"
+    echo "Unsupported environment or directory"
     exit 1
 fi
 
