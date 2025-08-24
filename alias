@@ -10,5 +10,4 @@ alias gaa='git add .'
 alias x='clear'
 
 # sync
-alias ns='bash $HOME/Code/dotfiles/sync_notes.sh'
 alias expsync='bash $HOME/Code/expense_tracker/sync.sh'
