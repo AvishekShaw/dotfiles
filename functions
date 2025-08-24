@@ -15,14 +15,14 @@ exp(){
 }
 
 # Function to sync notes across platforms
-ns() {
+ns(){
     if [[ "$OSTYPE" == "darwin"* ]]; then
         # macOS
         SCRIPT_PATH="$HOME/Code/dotfiles/sync_notes.sh"
         SHELL_CMD="bash"
-    elif [[ -d ~Documents ]]; then
+    elif [[ -d ~/Documents ]]; then
         # a-shell on iPhone
-        SCRIPT_PATH="~Documents/dotfiles/sync_notes.sh"
+        SCRIPT_PATH="~/Documents/dotfiles/sync_notes.sh"
         SHELL_CMD="sh"
     else
         echo "Unsupported environment"
@@ -30,7 +30,7 @@ ns() {
     fi
 
     if [[ -f "$SCRIPT_PATH" ]]; then
-        $SHELL_CMD "$SCRIPT_PATH"
+        "$SHELL_CMD" "$SCRIPT_PATH"
     else
         echo "Error: sync_notes.sh not found at $SCRIPT_PATH"
         return 1
