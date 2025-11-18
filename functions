@@ -36,3 +36,8 @@ ns(){
         return 1
     fi
 }
+
+alarm(){
+cd ~/Documents && bash timer.sh $1 10
+}
+

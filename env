@@ -1,0 +1,21 @@
+# Environment variables and exports
+# Add your custom environment variables here
+
+# Editor
+export EDITOR=vim
+export VISUAL=vim
+
+# Language and locale
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+# Path additions (if needed)
+# export PATH="$HOME/.local/bin:$PATH"
+
+# LaTeX (BasicTeX)
+export PATH="/usr/local/texlive/2025basic/bin/universal-darwin:$PATH"
+
+# Custom environment variables
+# export MY_CUSTOM_VAR="value"
+
+# You can add more environment variables as needed
