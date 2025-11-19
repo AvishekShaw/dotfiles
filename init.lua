@@ -17,6 +17,10 @@ vim.opt.shiftwidth = 2             -- Number of spaces for each indentation leve
 vim.opt.expandtab = true           -- Convert tabs to spaces
 vim.opt.smartindent = true         -- Smart autoindenting on new lines
 
+--- Code Folding
+vim.o.foldmethod = "indent"
+vim.o.foldlevel = 4
+
 -- Search
 vim.opt.ignorecase = true          -- Ignore case in search patterns
 vim.opt.smartcase = true           -- Override ignorecase if search has uppercase
@@ -138,6 +142,19 @@ require("lazy").setup({
       end,
     },
 
+    -- Obsidian
+    {
+      "epwalsh/obsidian.nvim",
+      dependencies = { "nvim-lua/plenary.nvim" },
+      config = function()
+        require("obsidian").setup({
+          workspaces = {
+            { name = "notes", path = "~/Documents/notes" },
+          },
+        })
+      end
+    } ,
+
     -- Fuzzy finder
     {
       "nvim-telescope/telescope.nvim",
@@ -165,7 +182,7 @@ require("lazy").setup({
         require("nvim-treesitter.configs").setup({
           ensure_installed = {
             "lua", "vim", "vimdoc", "python", "javascript",
-            "typescript", "html", "css", "json", "markdown"
+            "typescript", "html", "css", "json", "markdown", "markdown_inline"
           },
           auto_install = true,
           highlight = {
@@ -219,6 +236,84 @@ require("lazy").setup({
         })
       end,
     },
+
+    -- Markdown rendering
+    {
+      "MeanderingProgrammer/render-markdown.nvim",
+      dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+      ft = "markdown",                -- Only load for markdown files
+      config = function()
+        require("render-markdown").setup({
+          enabled = true,
+          render_modes = { "n", "c" }, -- Render in normal and command mode
+          heading = {
+            enabled = true,
+            sign = true,
+            icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
+          },
+          code = {
+            enabled = true,
+            sign = false,
+            style = "full",            -- Full-width code blocks
+            border = "thin",
+          },
+          bullet = {
+            enabled = true,
+            icons = { "●", "○", "◆", "◇" },
+          },
+        })
+      end,
+    },
+
+    -- Molten for interactive execution
+    {
+      "benlubas/molten-nvim",
+      version = "^1.0.0",
+      build = ":UpdateRemotePlugins",
+      dependencies = { "3rd/image.nvim" },
+      config = function()
+        vim.g.molten_auto_open_output = false
+        vim.g.molten_output_win_max_height = 20
+        vim.g.molten_wrap_output = true
+        vim.g.molten_virt_text_output = true
+
+        -- Keymaps
+        vim.keymap.set("n", "<leader>mi", ":MoltenInit python3<CR>")
+        vim.keymap.set("n", "<leader>me", ":MoltenEvaluateOperator<CR>")
+        vim.keymap.set("n", "<leader>rr", ":MoltenEvaluateOperator<CR>", { desc = "Evaluate current cell" })
+        vim.keymap.set("v", "<leader>r", ":<C-u>MoltenEvaluateVisual<CR>gv")
+        vim.keymap.set("n", "<leader>rd", ":MoltenDelete<CR>")
+        vim.keymap.set("n", "<leader>ro", ":MoltenShowOutput<CR>")
+      end,
+    },
+
+    -- Jupytext for conversion
+    {
+      "GCBallesteros/jupytext.nvim",
+      ft = "python",  -- Only load for Python files, not .ipynb
+      config = function()
+        require("jupytext").setup({
+          style = "percent",
+          output_extension = "ipynb",  -- Create paired .ipynb file
+          force_ft = "python",
+          custom_language_formatting = {
+            python = {
+              extension = "py",
+              style = "percent",
+              force_ft = "python",
+            },
+          },
+        })
+      end,
+    },
+
+    -- Image support (optional, needs Kitty terminal)
+    {
+      "3rd/image.nvim",
+      opts = {
+        backend = "kitty",
+      },
+    },
   },
 
   -- Settings for lazy.nvim itself
@@ -237,12 +332,13 @@ require("lazy").setup({
 
 -- General
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights" })
+vim.keymap.set("n", 'gb', '<C-o>', { desc = 'Go back' })
 
 -- Better window navigation
-vim.keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
-vim.keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to bottom window" })
-vim.keymap.set("n", "<C-k>", "<C-w>k", { desc = "Move to top window" })
-vim.keymap.set("n", "<C-l>", "<C-w>l", { desc = "Move to right window" })
+vim.keymap.set("n", "<leader>h", "<C-w>h", { desc = "Move to left window" })
+vim.keymap.set("n", "<leader>j", "<C-w>j", { desc = "Move to bottom window" })
+vim.keymap.set("n", "<leader>k", "<C-w>k", { desc = "Move to top window" })
+vim.keymap.set("n", "<leader>l", "<C-w>l", { desc = "Move to right window" })
 
 -- Resize windows
 vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<CR>", { desc = "Increase window height" })
@@ -342,6 +438,71 @@ vim.api.nvim_create_autocmd("VimEnter", {
     end
   end,
 })
+
+-- Markdown-specific settings
+vim.api.nvim_create_autocmd("FileType", {
+  desc = "Markdown-specific settings for better reading",
+  group = vim.api.nvim_create_augroup("markdown-settings", { clear = true }),
+  pattern = "markdown",
+  callback = function()
+    -- Concealment settings (required for render-markdown.nvim)
+    vim.opt_local.conceallevel = 2         -- Enable concealment
+    vim.opt_local.concealcursor = ""       -- Show concealed text on cursor line
+
+    -- Spell checking
+    vim.opt_local.spell = true
+    vim.opt_local.spelllang = "en_us"
+
+    -- Folding with treesitter
+    vim.opt_local.foldmethod = "expr"
+    vim.opt_local.foldexpr = "nvim_treesitter#foldexpr()"
+    vim.opt_local.foldenable = false       -- Don't fold by default
+    vim.opt_local.foldlevel = 99           -- Open all folds initially
+
+    -- Text wrapping (inherit from global settings, ensure they're set)
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true
+    vim.opt_local.breakindent = true       -- Indent wrapped lines
+  end,
+})
+
+-- Jupytext auto-sync: create paired .ipynb when opening .py with cell markers
+vim.api.nvim_create_autocmd("BufReadPost", {
+  desc = "Auto-create paired .ipynb for .py files with cell markers",
+  group = vim.api.nvim_create_augroup("jupytext-sync", { clear = true }),
+  pattern = "*.py",
+  callback = function()
+    local file = vim.fn.expand("%:p")
+    local ipynb_file = vim.fn.expand("%:p:r") .. ".ipynb"
+
+    -- Check if file has cell markers and .ipynb doesn't exist
+    local lines = vim.api.nvim_buf_get_lines(0, 0, 50, false)
+    local has_cells = false
+    for _, line in ipairs(lines) do
+      if line:match("^# %%") then
+        has_cells = true
+        break
+      end
+    end
+
+    if has_cells and vim.fn.filereadable(ipynb_file) == 0 then
+      -- Create paired .ipynb file using jupytext
+      vim.fn.system(string.format("jupytext --to ipynb '%s'", file))
+      print("Created paired notebook: " .. vim.fn.fnamemodify(ipynb_file, ":t"))
+    end
+  end,
+})
+
+-- Jupytext manual sync keymap
+vim.keymap.set("n", "<leader>js", function()
+  local file = vim.fn.expand("%:p")
+  if vim.bo.filetype == "python" then
+    vim.fn.system(string.format("jupytext --to ipynb '%s'", file))
+    print("Synced to .ipynb")
+  else
+    print("Not a Python file")
+  end
+end, { desc = "Jupytext sync to .ipynb" })
 
 -- ============================================================================
 -- END OF CONFIG
