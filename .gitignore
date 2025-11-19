@@ -1,0 +1,11 @@
+# Auto-generated Jupyter notebooks (paired from .py files)
+*.ipynb
+
+# Neovim backups (created by backup-nvim.sh)
+nvim-backups/
+
+# Claude Code artifacts
+.claude/
+
+# Temporary files
+backup_log_file
