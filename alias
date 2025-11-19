@@ -14,4 +14,5 @@ alias expsync='bash $HOME/Code/expense_tracker/sync.sh'
 
 # uv jupyter
 alias uvlab="uv run --with jupyter jupyter lab"
-
+alias news="newsboat"
+alias vim=nvim
