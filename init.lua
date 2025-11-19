@@ -142,15 +142,204 @@ require("lazy").setup({
       end,
     },
 
+    -- Completion engine
+    {
+      "hrsh7th/nvim-cmp",
+      commit = "ae644feb7b67bf1ce4260c231d1d4300b19c6f30",  -- Lock to known working version
+      dependencies = {
+        "hrsh7th/cmp-nvim-lsp",     -- LSP completion source
+        "hrsh7th/cmp-buffer",        -- Buffer completion source
+        "hrsh7th/cmp-path",          -- Path completion source
+        "L3MON4D3/LuaSnip",          -- Snippet engine
+        "saadparwaiz1/cmp_luasnip",  -- Snippet completion source
+        "rafamadriz/friendly-snippets", -- Collection of snippets
+      },
+      config = function()
+        local cmp = require("cmp")
+        local luasnip = require("luasnip")
+
+        -- Load friendly-snippets
+        require("luasnip.loaders.from_vscode").lazy_load()
+
+        cmp.setup({
+          snippet = {
+            expand = function(args)
+              luasnip.lsp_expand(args.body)
+            end,
+          },
+          mapping = cmp.mapping.preset.insert({
+            ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+            ["<C-f>"] = cmp.mapping.scroll_docs(4),
+            ["<C-Space>"] = cmp.mapping.complete(),
+            ["<C-e>"] = cmp.mapping.abort(),
+            ["<CR>"] = cmp.mapping.confirm({ select = true }),
+            ["<Tab>"] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                cmp.select_next_item()
+              elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+              else
+                fallback()
+              end
+            end, { "i", "s" }),
+            ["<S-Tab>"] = cmp.mapping(function(fallback)
+              if cmp.visible() then
+                cmp.select_prev_item()
+              elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+              else
+                fallback()
+              end
+            end, { "i", "s" }),
+          }),
+          sources = cmp.config.sources({
+            { name = "nvim_lsp" },
+            { name = "luasnip" },
+            { name = "obsidian" },
+            { name = "buffer" },
+            { name = "path" },
+          }),
+          window = {
+            completion = cmp.config.window.bordered(),
+            documentation = cmp.config.window.bordered(),
+          },
+          formatting = {
+            format = function(entry, vim_item)
+              -- Show source name
+              vim_item.menu = ({
+                nvim_lsp = "[LSP]",
+                luasnip = "[Snippet]",
+                obsidian = "[Obsidian]",
+                buffer = "[Buffer]",
+                path = "[Path]",
+              })[entry.source.name]
+              return vim_item
+            end,
+          },
+        })
+      end,
+    },
+
     -- Obsidian
     {
       "epwalsh/obsidian.nvim",
-      dependencies = { "nvim-lua/plenary.nvim" },
+      version = "^3.0.0",  -- Pin to v3.x (semantic versioning)
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "hrsh7th/nvim-cmp",  -- Add cmp as dependency
+      },
       config = function()
         require("obsidian").setup({
           workspaces = {
             { name = "notes", path = "~/Documents/notes" },
           },
+
+          -- Daily notes
+          daily_notes = {
+            folder = "daily",
+            date_format = "%Y-%m-%d",
+            alias_format = "%B %-d, %Y",
+            template = nil,  -- Set to template name if you create one
+          },
+
+          -- Templates
+          templates = {
+            folder = "templates",
+            date_format = "%Y-%m-%d",
+            time_format = "%H:%M",
+          },
+
+          -- Note completion
+          completion = {
+            nvim_cmp = true,
+            min_chars = 2,
+          },
+
+          -- Follow links with 'gf' in normal mode
+          mappings = {
+            ["gf"] = {
+              action = function()
+                return require("obsidian").util.gf_passthrough()
+              end,
+              opts = { noremap = false, expr = true, buffer = true },
+            },
+            ["<leader>ch"] = {
+              action = function()
+                return require("obsidian").util.toggle_checkbox()
+              end,
+              opts = { buffer = true },
+            },
+            ["<cr>"] = {
+              action = function()
+                return require("obsidian").util.smart_action()
+              end,
+              opts = { buffer = true, expr = true },
+            },
+          },
+
+          -- Note frontmatter
+          note_frontmatter_func = function(note)
+            local out = { id = note.id, aliases = note.aliases, tags = note.tags }
+            if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+              for k, v in pairs(note.metadata) do
+                out[k] = v
+              end
+            end
+            return out
+          end,
+
+          -- UI options
+          ui = {
+            enable = true,
+            checkboxes = {
+              [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
+              ["x"] = { char = "󰱒", hl_group = "ObsidianDone" },
+              [">"] = { char = "", hl_group = "ObsidianRightArrow" },
+              ["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
+            },
+            bullets = { char = "•", hl_group = "ObsidianBullet" },
+            external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
+            reference_text = { hl_group = "ObsidianRefText" },
+            highlight_text = { hl_group = "ObsidianHighlightText" },
+            tags = { hl_group = "ObsidianTag" },
+            block_ids = { hl_group = "ObsidianBlockID" },
+            hl_groups = {
+              ObsidianTodo = { bold = true, fg = "#f78c6c" },
+              ObsidianDone = { bold = true, fg = "#89ddff" },
+              ObsidianRightArrow = { bold = true, fg = "#f78c6c" },
+              ObsidianTilde = { bold = true, fg = "#ff5370" },
+              ObsidianBullet = { bold = true, fg = "#89ddff" },
+              ObsidianRefText = { underline = true, fg = "#c792ea" },
+              ObsidianExtLinkIcon = { fg = "#c792ea" },
+              ObsidianTag = { italic = true, fg = "#89ddff" },
+              ObsidianBlockID = { italic = true, fg = "#89ddff" },
+              ObsidianHighlightText = { bg = "#75662e" },
+            },
+          },
+
+          -- Attachments
+          attachments = {
+            img_folder = "attachments",
+          },
+
+          -- Preferred link style
+          preferred_link_style = "markdown",
+
+          -- Disable frontmatter management if you want
+          disable_frontmatter = false,
+
+          -- Optional: customize how note IDs are generated
+          note_id_func = function(title)
+            local suffix = ""
+            if title ~= nil then
+              suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+            else
+              for _ = 1, 4 do
+                suffix = suffix .. string.char(math.random(65, 90))
+              end
+            end
+            return tostring(os.time()) .. "-" .. suffix
+          end,
         })
       end
     } ,
@@ -260,6 +449,17 @@ require("lazy").setup({
           bullet = {
             enabled = true,
             icons = { "●", "○", "◆", "◇" },
+          },
+          checkbox = {
+            enabled = true,
+            unchecked = {
+              icon = '󰄱 ',
+              highlight = 'RenderMarkdownUnchecked',
+            },
+            checked = {
+              icon = '󰱒 ',
+              highlight = 'RenderMarkdownChecked',
+            },
           },
         })
       end,
@@ -399,6 +599,20 @@ vim.keymap.set("n", "]c", "<cmd>Gitsigns next_hunk<CR>", { desc = "Next git hunk
 vim.keymap.set("n", "[c", "<cmd>Gitsigns prev_hunk<CR>", { desc = "Previous git hunk" })
 vim.keymap.set("n", "<leader>gtb", "<cmd>Gitsigns toggle_current_line_blame<CR>", { desc = "Toggle git blame" })
 vim.keymap.set("n", "<leader>gtd", "<cmd>Gitsigns toggle_deleted<CR>", { desc = "Toggle deleted lines" })
+
+-- Obsidian keymaps
+vim.keymap.set("n", "<leader>on", "<cmd>ObsidianNew<CR>", { desc = "Create new note" })
+vim.keymap.set("n", "<leader>oo", "<cmd>ObsidianQuickSwitch<CR>", { desc = "Quick switch notes" })
+vim.keymap.set("n", "<leader>os", "<cmd>ObsidianSearch<CR>", { desc = "Search notes" })
+vim.keymap.set("n", "<leader>ot", "<cmd>ObsidianToday<CR>", { desc = "Open today's note" })
+vim.keymap.set("n", "<leader>oy", "<cmd>ObsidianYesterday<CR>", { desc = "Open yesterday's note" })
+vim.keymap.set("n", "<leader>ob", "<cmd>ObsidianBacklinks<CR>", { desc = "Show backlinks" })
+vim.keymap.set("n", "<leader>ol", "<cmd>ObsidianLinks<CR>", { desc = "Show links" })
+vim.keymap.set("n", "<leader>otg", "<cmd>ObsidianTags<CR>", { desc = "Show tags" })
+vim.keymap.set("n", "<leader>oT", "<cmd>ObsidianTemplate<CR>", { desc = "Insert template" })
+vim.keymap.set("n", "<leader>or", "<cmd>ObsidianRename<CR>", { desc = "Rename note" })
+vim.keymap.set("v", "<leader>ol", "<cmd>ObsidianLinkNew<CR>", { desc = "Link to new note" })
+vim.keymap.set("v", "<leader>oe", "<cmd>ObsidianExtractNote<CR>", { desc = "Extract to new note" })
 
 -- ============================================================================
 -- AUTO COMMANDS
