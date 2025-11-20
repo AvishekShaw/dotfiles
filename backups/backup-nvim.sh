@@ -14,8 +14,8 @@ echo "Creating Neovim backup: $BACKUP_NAME"
 mkdir -p "$BACKUP_DIR/$BACKUP_NAME"
 
 # Copy init.lua
-if [ -f "$HOME/Code/dotfiles/init.lua" ]; then
-    cp "$HOME/Code/dotfiles/init.lua" "$BACKUP_DIR/$BACKUP_NAME/"
+if [ -f "$HOME/Code/dotfiles/config/nvim/init.lua" ]; then
+    cp "$HOME/Code/dotfiles/config/nvim/init.lua" "$BACKUP_DIR/$BACKUP_NAME/"
     echo "✓ Backed up init.lua"
 fi
 
@@ -53,7 +53,7 @@ echo ""
 echo "To restore this backup:"
 echo "  cd $BACKUP_DIR"
 echo "  tar -xzf $BACKUP_NAME.tar.gz"
-echo "  cp $BACKUP_NAME/init.lua ~/Code/dotfiles/"
+echo "  cp $BACKUP_NAME/init.lua ~/Code/dotfiles/config/nvim/"
 echo "  cp $BACKUP_NAME/lazy-lock.json ~/.local/share/nvim/"
 echo ""
 

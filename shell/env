@@ -1,0 +1,68 @@
+# Environment variables and exports
+# Add your custom environment variables here
+
+# ============================================================================
+# Editor
+# ============================================================================
+export EDITOR=vim
+export VISUAL=vim
+
+# ============================================================================
+# Language and Locale
+# ============================================================================
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
+# ============================================================================
+# PATH Configuration
+# ============================================================================
+
+# LaTeX (BasicTeX)
+export PATH="/usr/local/texlive/2025basic/bin/universal-darwin:$PATH"
+
+# Homebrew
+export PATH="/opt/homebrew/bin:$PATH"
+
+# System paths
+export PATH="/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+export PATH="/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:$PATH"
+export PATH="/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:$PATH"
+export PATH="/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:$PATH"
+
+# iTerm2 utilities
+export PATH="/Applications/iTerm.app/Contents/Resources/utilities:$PATH"
+
+# RVM (Ruby Version Manager) - should be last PATH change
+export PATH="$PATH:$HOME/.rvm/bin"
+
+# ============================================================================
+# Language-Specific Environments
+# ============================================================================
+
+# Java
+export JAVA_HOME=$(/usr/libexec/java_home)
+
+# Node Version Manager (NVM)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# ============================================================================
+# Tool Initialization
+# ============================================================================
+
+# rbenv (Ruby version manager)
+eval "$(rbenv init -)"
+
+# ============================================================================
+# Automatic Package Sync Hooks
+# ============================================================================
+# These hooks automatically update Brewfile and requirements.txt when you
+# install/uninstall packages. This keeps your dotfiles in sync with your system.
+#
+# To disable temporarily: unset -f brew pip3
+# To enable auto-commit: export DOTFILES_AUTO_COMMIT=1
+
+# Source the brew and pip hooks
+[[ -f "$HOME/Code/dotfiles/hooks/brew.zsh" ]] && source "$HOME/Code/dotfiles/hooks/brew.zsh"
+[[ -f "$HOME/Code/dotfiles/hooks/pip.zsh" ]] && source "$HOME/Code/dotfiles/hooks/pip.zsh"

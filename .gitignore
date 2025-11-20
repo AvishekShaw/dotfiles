@@ -7,5 +7,14 @@ nvim-backups/
 # Claude Code artifacts
 .claude/
 
-# Temporary files
+# Temporary files and logs
 backup_log_file
+*.log
+
+# Secrets and credentials (DO NOT COMMIT)
+.env.local
+*.secret
+*.key
+*_secret
+*_credentials
+rclone.conf

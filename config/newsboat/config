@@ -1,0 +1,17 @@
+# Vim-style keybindings
+bind-key j down
+bind-key k up
+bind-key h quit
+bind-key l open
+
+# Auto-reload every 30 minutes
+auto-reload yes
+reload-time 30
+
+# Browser
+browser "w3m %u"
+
+# ,b opens in Brave
+macro b set browser "open -a 'Brave Browser' %u" ; open-in-browser ; set browser "w3m %u"
+# Or use default browser
+# browser "open %u"
