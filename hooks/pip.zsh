@@ -30,8 +30,8 @@ pip3() {
         echo ""
         echo "🐍 Updating requirements.txt..."
 
-        # Generate new requirements.txt
-        if command pip3 freeze > "$REQUIREMENTS_FILE" 2>/dev/null; then
+        # Generate new requirements.txt (excluding macOS system packages)
+        if command pip3 list --format=freeze --exclude altgraph --exclude future --exclude macholib --exclude six > "$REQUIREMENTS_FILE" 2>/dev/null; then
             local pkg_count=$(wc -l < "$REQUIREMENTS_FILE" | tr -d ' ')
             echo "✓ requirements.txt updated successfully ($pkg_count packages)"
 

@@ -126,8 +126,8 @@ update_requirements() {
         print_info "Backed up existing requirements.txt"
     fi
 
-    # Generate new requirements.txt
-    pip3 freeze > "$DOTFILES_DIR/packages/requirements.txt"
+    # Generate new requirements.txt (excluding macOS system packages)
+    pip3 list --format=freeze --exclude altgraph --exclude future --exclude macholib --exclude six > "$DOTFILES_DIR/packages/requirements.txt"
 
     # Count packages
     local pkg_count=$(wc -l < "$DOTFILES_DIR/packages/requirements.txt" | tr -d ' ')
