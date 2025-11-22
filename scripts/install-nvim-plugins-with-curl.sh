@@ -14,9 +14,10 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
-# Plugin directory
-PLUGIN_DIR="$HOME/.local/share/nvim/site/pack/plugins/start"
+# Plugin directories
+# Install to lazy's expected location so lazy.nvim finds them
 LAZY_DIR="$HOME/.local/share/nvim/lazy"
+PLUGIN_DIR="$LAZY_DIR"  # Install plugins where lazy.nvim expects them
 
 # Track success/failure
 TOTAL_PLUGINS=0
@@ -177,46 +178,46 @@ echo -e "${GREEN}Installing plugins...${NC}"
 echo ""
 
 # Core dependencies
-install_plugin "nvim-lua/plenary.nvim"
-install_plugin "nvim-tree/nvim-web-devicons"
+install_plugin "nvim-lua/plenary.nvim" "master" "$LAZY_DIR/plenary.nvim"
+install_plugin "nvim-tree/nvim-web-devicons" "master" "$LAZY_DIR/nvim-web-devicons"
 
 # Colorscheme
-install_plugin "catppuccin/nvim" "main" "$PLUGIN_DIR/catppuccin"
+install_plugin "catppuccin/nvim" "main" "$LAZY_DIR/catppuccin"
 
 # File Explorer
-install_plugin "nvim-tree/nvim-tree.lua"
+install_plugin "nvim-tree/nvim-tree.lua" "master" "$LAZY_DIR/nvim-tree.lua"
 
 # Completion engine
-install_plugin_by_commit "hrsh7th/nvim-cmp" "ae644feb7b67bf1ce4260c231d1d4300b19c6f30"
-install_plugin "hrsh7th/cmp-nvim-lsp"
-install_plugin "hrsh7th/cmp-buffer"
-install_plugin "hrsh7th/cmp-path"
-install_plugin "L3MON4D3/LuaSnip"
-install_plugin "saadparwaiz1/cmp_luasnip"
-install_plugin "rafamadriz/friendly-snippets"
+install_plugin_by_commit "hrsh7th/nvim-cmp" "ae644feb7b67bf1ce4260c231d1d4300b19c6f30" "$LAZY_DIR/nvim-cmp"
+install_plugin "hrsh7th/cmp-nvim-lsp" "master" "$LAZY_DIR/cmp-nvim-lsp"
+install_plugin "hrsh7th/cmp-buffer" "master" "$LAZY_DIR/cmp-buffer"
+install_plugin "hrsh7th/cmp-path" "master" "$LAZY_DIR/cmp-path"
+install_plugin "L3MON4D3/LuaSnip" "master" "$LAZY_DIR/LuaSnip"
+install_plugin "saadparwaiz1/cmp_luasnip" "master" "$LAZY_DIR/cmp_luasnip"
+install_plugin "rafamadriz/friendly-snippets" "master" "$LAZY_DIR/friendly-snippets"
 
 # Obsidian (note-taking)
-install_plugin "epwalsh/obsidian.nvim"
+install_plugin "epwalsh/obsidian.nvim" "main" "$LAZY_DIR/obsidian.nvim"
 
 # Fuzzy finder
-install_plugin_by_tag "nvim-telescope/telescope.nvim" "0.1.8"
+install_plugin_by_tag "nvim-telescope/telescope.nvim" "0.1.8" "$LAZY_DIR/telescope.nvim"
 
 # Syntax highlighting (treesitter)
-install_plugin "nvim-treesitter/nvim-treesitter"
+install_plugin "nvim-treesitter/nvim-treesitter" "master" "$LAZY_DIR/nvim-treesitter"
 
 # Git integration
-install_plugin "lewis6991/gitsigns.nvim"
+install_plugin "lewis6991/gitsigns.nvim" "main" "$LAZY_DIR/gitsigns.nvim"
 
 # Markdown rendering
-install_plugin "MeanderingProgrammer/render-markdown.nvim"
+install_plugin "MeanderingProgrammer/render-markdown.nvim" "main" "$LAZY_DIR/render-markdown.nvim"
 
 # Jupyter/Notebook support
-install_plugin "benlubas/molten-nvim"
-install_plugin_by_commit "GCBallesteros/NotebookNavigator.nvim" "20cb6f72939194e32eb3060578b445e5f2e7ae8b"
-install_plugin "GCBallesteros/jupytext.nvim"
+install_plugin "benlubas/molten-nvim" "main" "$LAZY_DIR/molten-nvim"
+install_plugin_by_commit "GCBallesteros/NotebookNavigator.nvim" "20cb6f72939194e32eb3060578b445e5f2e7ae8b" "$LAZY_DIR/NotebookNavigator.nvim"
+install_plugin "GCBallesteros/jupytext.nvim" "main" "$LAZY_DIR/jupytext.nvim"
 
 # Image support
-install_plugin "3rd/image.nvim"
+install_plugin "3rd/image.nvim" "master" "$LAZY_DIR/image.nvim"
 
 echo ""
 echo -e "${GREEN}========================================${NC}"
@@ -235,8 +236,8 @@ if [ ${#FAILED_PLUGINS[@]} -gt 0 ]; then
   echo ""
 fi
 
-echo -e "Plugins installed to: ${YELLOW}$PLUGIN_DIR${NC}"
-echo -e "Lazy.nvim installed to: ${YELLOW}$LAZY_DIR${NC}"
+echo -e "All plugins installed to: ${YELLOW}$LAZY_DIR${NC}"
+echo -e "  (This is where lazy.nvim expects to find them)"
 echo ""
 echo -e "${YELLOW}Next steps:${NC}"
 echo "1. Copy your init.lua to ~/.config/nvim/init.lua"
