@@ -1,0 +1,3 @@
+keymap C EXTERN_LINK 'echo %s | pbcopy'
+keymap y EXTERN_LINK 'echo %s | pbcopy'
+keymap b EXTERN_LINK

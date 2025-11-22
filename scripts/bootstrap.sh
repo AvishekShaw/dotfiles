@@ -231,6 +231,16 @@ setup_symlinks() {
     fi
     create_symlink "$DOTFILES_DIR/config/newsboat/config" "$HOME/.newsboat/config"
     create_symlink "$DOTFILES_DIR/config/newsboat/urls" "$HOME/.newsboat/urls"
+
+    # w3m
+    print_info "Setting up w3m configuration..."
+    if [ "$DRY_RUN" = false ]; then
+        mkdir -p "$HOME/.w3m"
+    else
+        print_info "Would create: $HOME/.w3m"
+    fi
+    create_symlink "$DOTFILES_DIR/config/w3m/config" "$HOME/.w3m/config"
+    create_symlink "$DOTFILES_DIR/config/w3m/keymap" "$HOME/.w3m/keymap"
 }
 
 install_vim_plugins() {

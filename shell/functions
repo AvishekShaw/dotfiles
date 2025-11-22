@@ -46,16 +46,40 @@ timer(){
         # Show active timers
         echo "Active Timers:"
         echo "=============="
+        local found_timers=false
         ps aux | grep -E "sleep [0-9]+" | grep -v grep | while read -r line; do
+            found_timers=true
             local pid=$(echo "$line" | awk '{print $2}')
             local cmd=$(echo "$line" | awk '{for(i=11;i<=NF;i++) printf $i" "; print ""}')
             # Extract sleep duration in seconds
             local sleep_seconds=$(echo "$cmd" | grep -o "sleep [0-9]*" | awk '{print $2}')
             if [ -n "$sleep_seconds" ]; then
-                local minutes=$((sleep_seconds / 60))
-                echo "  PID: $pid - ${minutes} minute timer"
+                # Get process start time
+                local start_time=$(ps -o lstart= -p "$pid" 2>/dev/null)
+                if [ -n "$start_time" ]; then
+                    local start_epoch=$(date -j -f "%a %b %d %T %Y" "$start_time" "+%s" 2>/dev/null)
+                    local current_epoch=$(date +%s)
+                    local elapsed=$((current_epoch - start_epoch))
+                    local remaining=$((sleep_seconds - elapsed))
+
+                    if [ $remaining -gt 0 ]; then
+                        local remaining_mins=$((remaining / 60))
+                        local remaining_secs=$((remaining % 60))
+                        local total_mins=$((sleep_seconds / 60))
+                        echo "  PID: $pid - ${total_mins}min timer, ${remaining_mins}m ${remaining_secs}s remaining"
+                    else
+                        echo "  PID: $pid - Timer finishing..."
+                    fi
+                else
+                    local minutes=$((sleep_seconds / 60))
+                    echo "  PID: $pid - ${minutes} minute timer"
+                fi
             fi
         done
+
+        if [ "$found_timers" = false ]; then
+            echo "  No active timers"
+        fi
 
         echo ""
         echo "Help Documentation:"

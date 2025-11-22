@@ -32,15 +32,12 @@ export PATH="/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/app
 # iTerm2 utilities
 export PATH="/Applications/iTerm.app/Contents/Resources/utilities:$PATH"
 
-# RVM (Ruby Version Manager) - should be last PATH change
-export PATH="$PATH:$HOME/.rvm/bin"
-
 # ============================================================================
 # Language-Specific Environments
 # ============================================================================
 
-# Java
-export JAVA_HOME=$(/usr/libexec/java_home)
+# Java (use OpenJDK 21 from Homebrew for signal-cli compatibility)
+export JAVA_HOME="/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home"
 
 # Node Version Manager (NVM)
 export NVM_DIR="$HOME/.nvm"
