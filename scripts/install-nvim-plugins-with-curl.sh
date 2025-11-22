@@ -224,14 +224,16 @@ install_plugin "epwalsh/obsidian.nvim" "main" "$LAZY_DIR/obsidian.nvim"
 # Fuzzy finder
 install_plugin_by_tag "nvim-telescope/telescope.nvim" "0.1.8" "$LAZY_DIR/telescope.nvim"
 
-# Syntax highlighting (treesitter)
-install_plugin "nvim-treesitter/nvim-treesitter" "master" "$LAZY_DIR/nvim-treesitter"
+# Syntax highlighting (treesitter) - SKIPPED
+# Treesitter requires build tools (gcc/clang) to compile parsers
+# Using Neovim's built-in syntax highlighting instead
+# install_plugin "nvim-treesitter/nvim-treesitter" "master" "$LAZY_DIR/nvim-treesitter"
 
 # Git integration
 install_plugin "lewis6991/gitsigns.nvim" "main" "$LAZY_DIR/gitsigns.nvim"
 
-# Markdown rendering
-install_plugin "MeanderingProgrammer/render-markdown.nvim" "main" "$LAZY_DIR/render-markdown.nvim"
+# Markdown rendering - SKIPPED (requires treesitter)
+# install_plugin "MeanderingProgrammer/render-markdown.nvim" "main" "$LAZY_DIR/render-markdown.nvim"
 
 # Jupyter/Notebook support
 install_plugin "benlubas/molten-nvim" "main" "$LAZY_DIR/molten-nvim"

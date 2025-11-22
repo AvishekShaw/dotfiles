@@ -194,19 +194,21 @@ if telescope_ok then
   })
 end
 
--- Treesitter
-local treesitter_ok, treesitter = pcall(require, "nvim-treesitter.configs")
-if treesitter_ok then
-  treesitter.setup({
-    ensure_installed = {
-      "lua", "vim", "vimdoc", "python", "javascript",
-      "typescript", "html", "css", "json", "markdown", "markdown_inline"
-    },
-    auto_install = false,  -- No auto-install without git
-    highlight = { enable = true },
-    indent = { enable = true },
-  })
-end
+-- Treesitter (commented out - requires compilation/build tools)
+-- local treesitter_ok, treesitter = pcall(require, "nvim-treesitter.configs")
+-- if treesitter_ok then
+--   treesitter.setup({
+--     -- Don't auto-install parsers (requires git + build tools)
+--     ensure_installed = {},
+--     auto_install = false,
+--     -- Only enable if parsers are pre-installed
+--     highlight = { enable = false },
+--     indent = { enable = false },
+--   })
+-- end
+
+-- Use Neovim's built-in syntax highlighting instead
+vim.cmd([[syntax enable]])
 
 -- Gitsigns
 local gitsigns_ok, gitsigns = pcall(require, "gitsigns")
@@ -223,14 +225,14 @@ if gitsigns_ok then
   })
 end
 
--- Render Markdown
-local render_md_ok, render_md = pcall(require, "render-markdown")
-if render_md_ok then
-  render_md.setup({
-    enabled = true,
-    render_modes = { "n", "c" },
-  })
-end
+-- Render Markdown (commented out - requires treesitter)
+-- local render_md_ok, render_md = pcall(require, "render-markdown")
+-- if render_md_ok then
+--   render_md.setup({
+--     enabled = true,
+--     render_modes = { "n", "c" },
+--   })
+-- end
 
 -- ============================================================================
 -- KEY MAPPINGS
@@ -333,7 +335,7 @@ vim.defer_fn(function()
   if tree_ok then table.insert(loaded, "nvim-tree") end
   if cmp_ok then table.insert(loaded, "nvim-cmp") end
   if telescope_ok then table.insert(loaded, "telescope") end
-  if treesitter_ok then table.insert(loaded, "treesitter") end
+  -- if treesitter_ok then table.insert(loaded, "treesitter") end
   if gitsigns_ok then table.insert(loaded, "gitsigns") end
   -- if obsidian_ok then table.insert(loaded, "obsidian") end
 

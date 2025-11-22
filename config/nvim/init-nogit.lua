@@ -374,28 +374,24 @@ if lazy_installed then
         end,
       },
 
-      -- Syntax highlighting
-      {
-        "nvim-treesitter/nvim-treesitter",
-        build = ":TSUpdate",
-        config = function()
-          local ok, treesitter = pcall(require, "nvim-treesitter.configs")
-          if not ok then return end
-
-          treesitter.setup({
-            ensure_installed = {
-              "lua", "vim", "vimdoc", "python", "javascript",
-              "typescript", "html", "css", "json", "markdown", "markdown_inline"
-            },
-            auto_install = has_git,  -- Only auto-install if git is available
-            highlight = {
-              enable = true,
-              additional_vim_regex_highlighting = false,
-            },
-            indent = { enable = true },
-          })
-        end,
-      },
+      -- Syntax highlighting (commented out - requires build tools)
+      -- Treesitter needs gcc/clang to compile parsers
+      -- {
+      --   "nvim-treesitter/nvim-treesitter",
+      --   build = ":TSUpdate",
+      --   config = function()
+      --     local ok, treesitter = pcall(require, "nvim-treesitter.configs")
+      --     if not ok then return end
+      --
+      --     treesitter.setup({
+      --       -- Don't auto-install parsers (requires git + build tools)
+      --       ensure_installed = {},
+      --       auto_install = false,
+      --       highlight = { enable = false },
+      --       indent = { enable = false },
+      --     })
+      --   end,
+      -- },
 
       -- Git integration
       {
@@ -443,47 +439,47 @@ if lazy_installed then
         end,
       },
 
-      -- Markdown rendering
-      {
-        "MeanderingProgrammer/render-markdown.nvim",
-        dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
-        ft = "markdown",
-        config = function()
-          local ok, render_md = pcall(require, "render-markdown")
-          if not ok then return end
-
-          render_md.setup({
-            enabled = true,
-            render_modes = { "n", "c" },
-            heading = {
-              enabled = true,
-              sign = true,
-              icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
-            },
-            code = {
-              enabled = true,
-              sign = false,
-              style = "full",
-              border = "thin",
-            },
-            bullet = {
-              enabled = true,
-              icons = { "●", "○", "◆", "◇" },
-            },
-            checkbox = {
-              enabled = true,
-              unchecked = {
-                icon = '󰄱 ',
-                highlight = 'RenderMarkdownUnchecked',
-              },
-              checked = {
-                icon = '󰱒 ',
-                highlight = 'RenderMarkdownChecked',
-              },
-            },
-          })
-        end,
-      },
+      -- Markdown rendering (commented out - requires treesitter)
+      -- {
+      --   "MeanderingProgrammer/render-markdown.nvim",
+      --   dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" },
+      --   ft = "markdown",
+      --   config = function()
+      --     local ok, render_md = pcall(require, "render-markdown")
+      --     if not ok then return end
+      --
+      --     render_md.setup({
+      --       enabled = true,
+      --       render_modes = { "n", "c" },
+      --       heading = {
+      --         enabled = true,
+      --         sign = true,
+      --         icons = { "󰲡 ", "󰲣 ", "󰲥 ", "󰲧 ", "󰲩 ", "󰲫 " },
+      --       },
+      --       code = {
+      --         enabled = true,
+      --         sign = false,
+      --         style = "full",
+      --         border = "thin",
+      --       },
+      --       bullet = {
+      --         enabled = true,
+      --         icons = { "●", "○", "◆", "◇" },
+      --       },
+      --       checkbox = {
+      --         enabled = true,
+      --         unchecked = {
+      --           icon = '󰄱 ',
+      --           highlight = 'RenderMarkdownUnchecked',
+      --         },
+      --         checked = {
+      --           icon = '󰱒 ',
+      --           highlight = 'RenderMarkdownChecked',
+      --         },
+      --       },
+      --     })
+      --   end,
+      -- },
 
       -- Molten for interactive execution
       {
@@ -580,6 +576,14 @@ if lazy_installed then
 else
   vim.notify("Running Neovim without lazy.nvim plugin manager", vim.log.levels.INFO)
 end
+
+-- ============================================================================
+-- FALLBACK SYNTAX HIGHLIGHTING (if treesitter disabled)
+-- ============================================================================
+
+-- Enable Neovim's built-in syntax highlighting
+vim.cmd([[syntax enable]])
+vim.cmd([[filetype plugin indent on]])
 
 -- ============================================================================
 -- KEY MAPPINGS
