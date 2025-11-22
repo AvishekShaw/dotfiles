@@ -56,6 +56,16 @@ vim.g.mapleader = " "              -- Space as leader key
 vim.g.maplocalleader = "\\"        -- Backslash as local leader
 
 -- ============================================================================
+-- PYTHON CONFIGURATION
+-- ============================================================================
+
+-- Set Python path to use local venv if it exists
+local venv_python = vim.fn.getcwd() .. '/.venv/bin/python'
+if vim.fn.filereadable(venv_python) == 1 then
+  vim.g.python3_host_prog = venv_python
+end
+
+-- ============================================================================
 -- LAZY.NVIM PLUGIN MANAGER BOOTSTRAP
 -- ============================================================================
 
@@ -478,12 +488,41 @@ require("lazy").setup({
         vim.g.molten_virt_text_output = true
 
         -- Keymaps
-        vim.keymap.set("n", "<leader>mi", ":MoltenInit python3<CR>")
-        vim.keymap.set("n", "<leader>me", ":MoltenEvaluateOperator<CR>")
-        vim.keymap.set("n", "<leader>rr", ":MoltenEvaluateOperator<CR>", { desc = "Evaluate current cell" })
-        vim.keymap.set("v", "<leader>r", ":<C-u>MoltenEvaluateVisual<CR>gv")
-        vim.keymap.set("n", "<leader>rd", ":MoltenDelete<CR>")
-        vim.keymap.set("n", "<leader>ro", ":MoltenShowOutput<CR>")
+        vim.keymap.set("n", "<leader>mi", ":MoltenInit python3<CR>", { desc = "Initialize Molten" })
+        vim.keymap.set("n", "<leader>me", ":MoltenEvaluateOperator<CR>", { desc = "Evaluate with operator" })
+        vim.keymap.set("n", "<leader>rl", ":MoltenEvaluateLine<CR>", { desc = "Evaluate line" })
+        vim.keymap.set("v", "<leader>r", ":<C-u>MoltenEvaluateVisual<CR>gv", { desc = "Evaluate visual selection" })
+        vim.keymap.set("n", "<leader>rd", ":MoltenDelete<CR>", { desc = "Delete Molten cell" })
+        vim.keymap.set("n", "<leader>ro", ":MoltenShowOutput<CR>", { desc = "Show output" })
+      end,
+    },
+
+    -- NotebookNavigator for cell navigation and execution
+    {
+      "GCBallesteros/NotebookNavigator.nvim",
+      commit = "20cb6f72939194e32eb3060578b445e5f2e7ae8b",  -- Latest stable (May 23, 2024)
+      dependencies = { "benlubas/molten-nvim" },
+      config = function()
+        local nn = require("notebook-navigator")
+        nn.setup({
+          activate_hydra_keys = "<leader>h",  -- Activate Hydra mode
+          show_hydra_hint = true,             -- Show Hydra hints
+          repl_provider = "auto",             -- Auto-detect Molten
+          cell_markers = {
+            python = "# %%",
+          },
+        })
+
+        -- Keymaps for cell navigation and execution
+        vim.keymap.set("n", "<leader>rc", function() nn.run_cell() end, { desc = "Run cell" })
+        vim.keymap.set("n", "<leader>rx", function() nn.run_and_move() end, { desc = "Run cell and move" })
+        vim.keymap.set("n", "<leader>rj", function() nn.move_cell("d") end, { desc = "Move to next cell" })
+        vim.keymap.set("n", "<leader>rk", function() nn.move_cell("u") end, { desc = "Move to previous cell" })
+        vim.keymap.set("n", "<leader>ca", function() nn.add_cell_above() end, { desc = "Add cell above" })
+        vim.keymap.set("n", "<leader>cb", function() nn.add_cell_below() end, { desc = "Add cell below" })
+        vim.keymap.set("n", "<leader>cs", function() nn.split_cell() end, { desc = "Split cell" })
+        vim.keymap.set("n", "<leader>cm", function() nn.merge_cell("d") end, { desc = "Merge with next cell" })
+        vim.keymap.set("n", "<leader>cc", function() nn.comment_cell() end, { desc = "Comment cell" })
       end,
     },
 

@@ -41,3 +41,22 @@ alarm(){
 cd ~/Documents && bash timer.sh $1 10
 }
 
+timer(){
+    if [ -z "$1" ]; then
+        echo "Usage: timer <minutes>"
+        return 1
+    fi
+    local minutes=$1
+    local seconds=$((minutes * 60))
+
+    # Run timer in background
+    (sleep $seconds && \
+     osascript -e "display notification \"${minutes} minute timer finished!\" with title \"Timer\"" && \
+     for i in {1..3}; do afplay /System/Library/Sounds/Glass.aiff; done) &
+
+    local pid=$!
+    echo "Timer started: ${minutes} minutes (${seconds}s)"
+    echo "Running in background (PID: $pid)"
+    echo "To cancel: kill $pid"
+}
+

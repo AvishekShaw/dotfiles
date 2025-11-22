@@ -16,3 +16,7 @@ alias expsync='bash $HOME/Code/expense_tracker/sync.sh'
 alias uvlab="uv run --with jupyter jupyter lab"
 alias news="newsboat"
 alias vim=nvim
+
+# system
+alias shutdown='sudo shutdown -h now'
+alias restart='sudo shutdown -r now'
