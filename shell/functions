@@ -43,8 +43,36 @@ cd ~/Documents && bash timer.sh $1 10
 
 timer(){
     if [ -z "$1" ]; then
+        # Show active timers
+        echo "Active Timers:"
+        echo "=============="
+        ps aux | grep -E "sleep [0-9]+" | grep -v grep | while read -r line; do
+            local pid=$(echo "$line" | awk '{print $2}')
+            local cmd=$(echo "$line" | awk '{for(i=11;i<=NF;i++) printf $i" "; print ""}')
+            # Extract sleep duration in seconds
+            local sleep_seconds=$(echo "$cmd" | grep -o "sleep [0-9]*" | awk '{print $2}')
+            if [ -n "$sleep_seconds" ]; then
+                local minutes=$((sleep_seconds / 60))
+                echo "  PID: $pid - ${minutes} minute timer"
+            fi
+        done
+
+        echo ""
+        echo "Help Documentation:"
+        echo "=================="
         echo "Usage: timer <minutes>"
-        return 1
+        echo ""
+        echo "Description:"
+        echo "  Starts a background timer that will notify you when complete."
+        echo ""
+        echo "Examples:"
+        echo "  timer 5         # Start a 5 minute timer"
+        echo "  timer 25        # Start a 25 minute timer (Pomodoro)"
+        echo "  timer           # Show this help and active timers"
+        echo ""
+        echo "To cancel a timer:"
+        echo "  kill <PID>      # Use the PID shown above"
+        return 0
     fi
     local minutes=$1
     local seconds=$((minutes * 60))
