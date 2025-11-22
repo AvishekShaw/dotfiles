@@ -1,0 +1,11 @@
+# Display inline images
+display_image 1
+auto_image 1
+
+# Image scale
+image_scale 100
+
+# For iTerm2 compatibility
+extbrowser open %s
+use_mouse=1
+extbrowser2=/usr/bin/pbcopy
