@@ -245,112 +245,112 @@ if lazy_installed then
         end,
       },
 
-      -- Obsidian
-      {
-        "epwalsh/obsidian.nvim",
-        version = "^3.0.0",
-        dependencies = {
-          "nvim-lua/plenary.nvim",
-          "hrsh7th/nvim-cmp",
-        },
-        config = function()
-          local ok, obsidian = pcall(require, "obsidian")
-          if not ok then return end
+      -- Obsidian (commented out - uncomment if you use Obsidian)
+      -- {
+      --   "epwalsh/obsidian.nvim",
+      --   version = "^3.0.0",
+      --   dependencies = {
+      --     "nvim-lua/plenary.nvim",
+      --     "hrsh7th/nvim-cmp",
+      --   },
+      --   config = function()
+      --     local ok, obsidian = pcall(require, "obsidian")
+      --     if not ok then return end
 
-          obsidian.setup({
-            workspaces = {
-              { name = "notes", path = "~/Documents/notes" },
-            },
-            daily_notes = {
-              folder = "daily",
-              date_format = "%Y-%m-%d",
-              alias_format = "%B %-d, %Y",
-              template = nil,
-            },
-            templates = {
-              folder = "templates",
-              date_format = "%Y-%m-%d",
-              time_format = "%H:%M",
-            },
-            completion = {
-              nvim_cmp = true,
-              min_chars = 2,
-            },
-            mappings = {
-              ["gf"] = {
-                action = function()
-                  return require("obsidian").util.gf_passthrough()
-                end,
-                opts = { noremap = false, expr = true, buffer = true },
-              },
-              ["<leader>ch"] = {
-                action = function()
-                  return require("obsidian").util.toggle_checkbox()
-                end,
-                opts = { buffer = true },
-              },
-              ["<cr>"] = {
-                action = function()
-                  return require("obsidian").util.smart_action()
-                end,
-                opts = { buffer = true, expr = true },
-              },
-            },
-            note_frontmatter_func = function(note)
-              local out = { id = note.id, aliases = note.aliases, tags = note.tags }
-              if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
-                for k, v in pairs(note.metadata) do
-                  out[k] = v
-                end
-              end
-              return out
-            end,
-            ui = {
-              enable = true,
-              checkboxes = {
-                [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
-                ["x"] = { char = "󰱒", hl_group = "ObsidianDone" },
-                [">"] = { char = "", hl_group = "ObsidianRightArrow" },
-                ["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
-              },
-              bullets = { char = "•", hl_group = "ObsidianBullet" },
-              external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
-              reference_text = { hl_group = "ObsidianRefText" },
-              highlight_text = { hl_group = "ObsidianHighlightText" },
-              tags = { hl_group = "ObsidianTag" },
-              block_ids = { hl_group = "ObsidianBlockID" },
-              hl_groups = {
-                ObsidianTodo = { bold = true, fg = "#f78c6c" },
-                ObsidianDone = { bold = true, fg = "#89ddff" },
-                ObsidianRightArrow = { bold = true, fg = "#f78c6c" },
-                ObsidianTilde = { bold = true, fg = "#ff5370" },
-                ObsidianBullet = { bold = true, fg = "#89ddff" },
-                ObsidianRefText = { underline = true, fg = "#c792ea" },
-                ObsidianExtLinkIcon = { fg = "#c792ea" },
-                ObsidianTag = { italic = true, fg = "#89ddff" },
-                ObsidianBlockID = { italic = true, fg = "#89ddff" },
-                ObsidianHighlightText = { bg = "#75662e" },
-              },
-            },
-            attachments = {
-              img_folder = "attachments",
-            },
-            preferred_link_style = "markdown",
-            disable_frontmatter = false,
-            note_id_func = function(title)
-              local suffix = ""
-              if title ~= nil then
-                suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
-              else
-                for _ = 1, 4 do
-                  suffix = suffix .. string.char(math.random(65, 90))
-                end
-              end
-              return tostring(os.time()) .. "-" .. suffix
-            end,
-          })
-        end
-      },
+      --     obsidian.setup({
+      --       workspaces = {
+      --         { name = "notes", path = "~/Documents/notes" },
+      --       },
+      --       daily_notes = {
+      --         folder = "daily",
+      --         date_format = "%Y-%m-%d",
+      --         alias_format = "%B %-d, %Y",
+      --         template = nil,
+      --       },
+      --       templates = {
+      --         folder = "templates",
+      --         date_format = "%Y-%m-%d",
+      --         time_format = "%H:%M",
+      --       },
+      --       completion = {
+      --         nvim_cmp = true,
+      --         min_chars = 2,
+      --       },
+      --       mappings = {
+      --         ["gf"] = {
+      --           action = function()
+      --             return require("obsidian").util.gf_passthrough()
+      --           end,
+      --           opts = { noremap = false, expr = true, buffer = true },
+      --         },
+      --         ["<leader>ch"] = {
+      --           action = function()
+      --             return require("obsidian").util.toggle_checkbox()
+      --           end,
+      --           opts = { buffer = true },
+      --         },
+      --         ["<cr>"] = {
+      --           action = function()
+      --             return require("obsidian").util.smart_action()
+      --           end,
+      --           opts = { buffer = true, expr = true },
+      --         },
+      --       },
+      --       note_frontmatter_func = function(note)
+      --         local out = { id = note.id, aliases = note.aliases, tags = note.tags }
+      --         if note.metadata ~= nil and not vim.tbl_isempty(note.metadata) then
+      --           for k, v in pairs(note.metadata) do
+      --             out[k] = v
+      --           end
+      --         end
+      --         return out
+      --       end,
+      --       ui = {
+      --         enable = true,
+      --         checkboxes = {
+      --           [" "] = { char = "󰄱", hl_group = "ObsidianTodo" },
+      --           ["x"] = { char = "󰱒", hl_group = "ObsidianDone" },
+      --           [">"] = { char = "", hl_group = "ObsidianRightArrow" },
+      --           ["~"] = { char = "󰰱", hl_group = "ObsidianTilde" },
+      --         },
+      --         bullets = { char = "•", hl_group = "ObsidianBullet" },
+      --         external_link_icon = { char = "", hl_group = "ObsidianExtLinkIcon" },
+      --         reference_text = { hl_group = "ObsidianRefText" },
+      --         highlight_text = { hl_group = "ObsidianHighlightText" },
+      --         tags = { hl_group = "ObsidianTag" },
+      --         block_ids = { hl_group = "ObsidianBlockID" },
+      --         hl_groups = {
+      --           ObsidianTodo = { bold = true, fg = "#f78c6c" },
+      --           ObsidianDone = { bold = true, fg = "#89ddff" },
+      --           ObsidianRightArrow = { bold = true, fg = "#f78c6c" },
+      --           ObsidianTilde = { bold = true, fg = "#ff5370" },
+      --           ObsidianBullet = { bold = true, fg = "#89ddff" },
+      --           ObsidianRefText = { underline = true, fg = "#c792ea" },
+      --           ObsidianExtLinkIcon = { fg = "#c792ea" },
+      --           ObsidianTag = { italic = true, fg = "#89ddff" },
+      --           ObsidianBlockID = { italic = true, fg = "#89ddff" },
+      --           ObsidianHighlightText = { bg = "#75662e" },
+      --         },
+      --       },
+      --       attachments = {
+      --         img_folder = "attachments",
+      --       },
+      --       preferred_link_style = "markdown",
+      --       disable_frontmatter = false,
+      --       note_id_func = function(title)
+      --         local suffix = ""
+      --         if title ~= nil then
+      --           suffix = title:gsub(" ", "-"):gsub("[^A-Za-z0-9-]", ""):lower()
+      --         else
+      --           for _ = 1, 4 do
+      --             suffix = suffix .. string.char(math.random(65, 90))
+      --           end
+      --         end
+      --         return tostring(os.time()) .. "-" .. suffix
+      --       end,
+      --     })
+      --   end
+      -- },
 
       -- Fuzzy finder
       {
@@ -661,21 +661,21 @@ if pcall(require, "gitsigns") then
   vim.keymap.set("n", "<leader>gtd", "<cmd>Gitsigns toggle_deleted<CR>", { desc = "Toggle deleted lines" })
 end
 
--- Obsidian keymaps (only if obsidian is loaded)
-if pcall(require, "obsidian") then
-  vim.keymap.set("n", "<leader>on", "<cmd>ObsidianNew<CR>", { desc = "Create new note" })
-  vim.keymap.set("n", "<leader>oo", "<cmd>ObsidianQuickSwitch<CR>", { desc = "Quick switch notes" })
-  vim.keymap.set("n", "<leader>os", "<cmd>ObsidianSearch<CR>", { desc = "Search notes" })
-  vim.keymap.set("n", "<leader>ot", "<cmd>ObsidianToday<CR>", { desc = "Open today's note" })
-  vim.keymap.set("n", "<leader>oy", "<cmd>ObsidianYesterday<CR>", { desc = "Open yesterday's note" })
-  vim.keymap.set("n", "<leader>ob", "<cmd>ObsidianBacklinks<CR>", { desc = "Show backlinks" })
-  vim.keymap.set("n", "<leader>ol", "<cmd>ObsidianLinks<CR>", { desc = "Show links" })
-  vim.keymap.set("n", "<leader>otg", "<cmd>ObsidianTags<CR>", { desc = "Show tags" })
-  vim.keymap.set("n", "<leader>oT", "<cmd>ObsidianTemplate<CR>", { desc = "Insert template" })
-  vim.keymap.set("n", "<leader>or", "<cmd>ObsidianRename<CR>", { desc = "Rename note" })
-  vim.keymap.set("v", "<leader>ol", "<cmd>ObsidianLinkNew<CR>", { desc = "Link to new note" })
-  vim.keymap.set("v", "<leader>oe", "<cmd>ObsidianExtractNote<CR>", { desc = "Extract to new note" })
-end
+-- Obsidian keymaps (commented out - uncomment if you use Obsidian)
+-- if pcall(require, "obsidian") then
+--   vim.keymap.set("n", "<leader>on", "<cmd>ObsidianNew<CR>", { desc = "Create new note" })
+--   vim.keymap.set("n", "<leader>oo", "<cmd>ObsidianQuickSwitch<CR>", { desc = "Quick switch notes" })
+--   vim.keymap.set("n", "<leader>os", "<cmd>ObsidianSearch<CR>", { desc = "Search notes" })
+--   vim.keymap.set("n", "<leader>ot", "<cmd>ObsidianToday<CR>", { desc = "Open today's note" })
+--   vim.keymap.set("n", "<leader>oy", "<cmd>ObsidianYesterday<CR>", { desc = "Open yesterday's note" })
+--   vim.keymap.set("n", "<leader>ob", "<cmd>ObsidianBacklinks<CR>", { desc = "Show backlinks" })
+--   vim.keymap.set("n", "<leader>ol", "<cmd>ObsidianLinks<CR>", { desc = "Show links" })
+--   vim.keymap.set("n", "<leader>otg", "<cmd>ObsidianTags<CR>", { desc = "Show tags" })
+--   vim.keymap.set("n", "<leader>oT", "<cmd>ObsidianTemplate<CR>", { desc = "Insert template" })
+--   vim.keymap.set("n", "<leader>or", "<cmd>ObsidianRename<CR>", { desc = "Rename note" })
+--   vim.keymap.set("v", "<leader>ol", "<cmd>ObsidianLinkNew<CR>", { desc = "Link to new note" })
+--   vim.keymap.set("v", "<leader>oe", "<cmd>ObsidianExtractNote<CR>", { desc = "Extract to new note" })
+-- end
 
 -- ============================================================================
 -- AUTO COMMANDS

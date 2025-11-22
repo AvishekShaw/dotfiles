@@ -59,6 +59,13 @@ install_plugin() {
     if [ -d "/tmp/$extracted_name" ]; then
       rm -rf "$target_dir"
       mv "/tmp/$extracted_name" "$target_dir"
+
+      # Save commit info for update checking
+      local commit=$(curl -s "https://api.github.com/repos/$repo/commits/$branch" | grep -m 1 '"sha"' | cut -d'"' -f4)
+      if [ -n "$commit" ]; then
+        echo "$commit" > "$target_dir/.git-commit"
+      fi
+
       rm -f "$temp_file"
       echo -e "${GREEN}✓ Installed $name${NC}"
       SUCCESSFUL_PLUGINS=$((SUCCESSFUL_PLUGINS + 1))
@@ -76,6 +83,13 @@ install_plugin() {
       if [ -d "/tmp/$extracted_name" ]; then
         rm -rf "$target_dir"
         mv "/tmp/$extracted_name" "$target_dir"
+
+        # Save commit info for update checking
+        local commit=$(curl -s "https://api.github.com/repos/$repo/commits/main" | grep -m 1 '"sha"' | cut -d'"' -f4)
+        if [ -n "$commit" ]; then
+          echo "$commit" > "$target_dir/.git-commit"
+        fi
+
         rm -f "$temp_file"
         echo -e "${GREEN}✓ Installed $name${NC}"
         SUCCESSFUL_PLUGINS=$((SUCCESSFUL_PLUGINS + 1))
@@ -119,6 +133,10 @@ install_plugin_by_tag() {
     if [ -d "/tmp/$extracted_name" ]; then
       rm -rf "$target_dir"
       mv "/tmp/$extracted_name" "$target_dir"
+
+      # Save tag info for update checking
+      echo "tag:$tag" > "$target_dir/.git-commit"
+
       rm -f "$temp_file"
       echo -e "${GREEN}✓ Installed $name @ $tag${NC}"
       SUCCESSFUL_PLUGINS=$((SUCCESSFUL_PLUGINS + 1))
@@ -157,6 +175,10 @@ install_plugin_by_commit() {
     if [ -d "/tmp/$extracted_name" ]; then
       rm -rf "$target_dir"
       mv "/tmp/$extracted_name" "$target_dir"
+
+      # Save commit info for update checking
+      echo "$commit" > "$target_dir/.git-commit"
+
       rm -f "$temp_file"
       echo -e "${GREEN}✓ Installed $name @ ${commit:0:7}${NC}"
       SUCCESSFUL_PLUGINS=$((SUCCESSFUL_PLUGINS + 1))

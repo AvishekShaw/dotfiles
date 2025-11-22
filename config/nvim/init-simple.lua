@@ -161,23 +161,23 @@ if cmp_ok then
   })
 end
 
--- Obsidian
-local obsidian_ok, obsidian = pcall(require, "obsidian")
-if obsidian_ok then
-  obsidian.setup({
-    workspaces = {
-      { name = "notes", path = "~/Documents/notes" },
-    },
-    daily_notes = {
-      folder = "daily",
-      date_format = "%Y-%m-%d",
-    },
-    completion = {
-      nvim_cmp = true,
-      min_chars = 2,
-    },
-  })
-end
+-- Obsidian (commented out - uncomment if you use Obsidian)
+-- local obsidian_ok, obsidian = pcall(require, "obsidian")
+-- if obsidian_ok then
+--   obsidian.setup({
+--     workspaces = {
+--       { name = "notes", path = "~/Documents/notes" },
+--     },
+--     daily_notes = {
+--       folder = "daily",
+--       date_format = "%Y-%m-%d",
+--     },
+--     completion = {
+--       nvim_cmp = true,
+--       min_chars = 2,
+--     },
+--   })
+-- end
 
 -- Telescope
 local telescope_ok, telescope = pcall(require, "telescope")
@@ -287,12 +287,12 @@ if gitsigns_ok then
   vim.keymap.set("n", "[c", "<cmd>Gitsigns prev_hunk<CR>", { desc = "Previous git hunk" })
 end
 
-if obsidian_ok then
-  vim.keymap.set("n", "<leader>on", "<cmd>ObsidianNew<CR>", { desc = "Create new note" })
-  vim.keymap.set("n", "<leader>oo", "<cmd>ObsidianQuickSwitch<CR>", { desc = "Quick switch notes" })
-  vim.keymap.set("n", "<leader>os", "<cmd>ObsidianSearch<CR>", { desc = "Search notes" })
-  vim.keymap.set("n", "<leader>ot", "<cmd>ObsidianToday<CR>", { desc = "Open today's note" })
-end
+-- if obsidian_ok then
+--   vim.keymap.set("n", "<leader>on", "<cmd>ObsidianNew<CR>", { desc = "Create new note" })
+--   vim.keymap.set("n", "<leader>oo", "<cmd>ObsidianQuickSwitch<CR>", { desc = "Quick switch notes" })
+--   vim.keymap.set("n", "<leader>os", "<cmd>ObsidianSearch<CR>", { desc = "Search notes" })
+--   vim.keymap.set("n", "<leader>ot", "<cmd>ObsidianToday<CR>", { desc = "Open today's note" })
+-- end
 
 -- ============================================================================
 -- AUTO COMMANDS
@@ -335,7 +335,7 @@ vim.defer_fn(function()
   if telescope_ok then table.insert(loaded, "telescope") end
   if treesitter_ok then table.insert(loaded, "treesitter") end
   if gitsigns_ok then table.insert(loaded, "gitsigns") end
-  if obsidian_ok then table.insert(loaded, "obsidian") end
+  -- if obsidian_ok then table.insert(loaded, "obsidian") end
 
   if #loaded > 0 then
     print("Loaded plugins: " .. table.concat(loaded, ", "))
