@@ -293,10 +293,12 @@ end
 --   vim.keymap.set("n", "<leader>nn", "<cmd>ObsidianNew<CR>", { desc = "Create new note" })
 --   vim.keymap.set("n", "<leader>no", "<cmd>ObsidianQuickSwitch<CR>", { desc = "Quick switch notes" })
 --   vim.keymap.set("n", "<leader>ns", "<cmd>ObsidianSearch<CR>", { desc = "Search notes" })
---   vim.keymap.set("n", "<leader>nt", "<cmd>ObsidianToday<CR>", { desc = "Open today's note" })
+--   vim.keymap.set("n", "<leader>nd", "<cmd>ObsidianToday<CR>", { desc = "Open today's note (daily)" })
 --   vim.keymap.set("n", "<leader>ny", "<cmd>ObsidianYesterday<CR>", { desc = "Open yesterday's note" })
 --   vim.keymap.set("n", "<leader>nb", "<cmd>ObsidianBacklinks<CR>", { desc = "Show backlinks" })
 --   vim.keymap.set("n", "<leader>nl", "<cmd>ObsidianLinks<CR>", { desc = "Show links" })
+--   vim.keymap.set("n", "<leader>ng", "<cmd>ObsidianTags<CR>", { desc = "Show tags" })
+--   vim.keymap.set("n", "<leader>nt", "<cmd>ObsidianTemplate<CR>", { desc = "Insert template" })
 --   vim.keymap.set("n", "<leader>nfv", "<cmd>ObsidianFollowLink vsplit<CR>", { desc = "Follow link in vsplit" })
 --   vim.keymap.set("n", "<leader>nfh", "<cmd>ObsidianFollowLink hsplit<CR>", { desc = "Follow link in hsplit" })
 -- end

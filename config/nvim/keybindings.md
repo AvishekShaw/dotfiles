@@ -145,12 +145,12 @@
 | `<leader>nn` | Normal | Create new note |
 | `<leader>no` | Normal | Quick switch notes |
 | `<leader>ns` | Normal | Search notes |
-| `<leader>nt` | Normal | Open today's note |
+| `<leader>nd` | Normal | Open today's note (daily) |
 | `<leader>ny` | Normal | Open yesterday's note |
 | `<leader>nb` | Normal | Show backlinks |
 | `<leader>nl` | Normal | Show links |
 | `<leader>ng` | Normal | Show tags |
-| `<leader>nT` | Normal | Insert template |
+| `<leader>nt` | Normal | Insert template |
 | `<leader>nr` | Normal | Rename note |
 | `<leader>nl` | Visual | Link to new note |
 | `<leader>ne` | Visual | Extract to new note |
