@@ -1,3 +1,47 @@
 keymap C EXTERN_LINK 'echo %s | pbcopy'
 keymap y EXTERN_LINK 'echo %s | pbcopy'
-keymap b EXTERN_LINK
+
+# Vim-style navigation
+keymap h MOVE_LEFT
+keymap j MOVE_DOWN
+keymap k MOVE_UP
+keymap l MOVE_RIGHT
+keymap gg BEGIN
+keymap G END
+keymap 0 LINE_BEGIN
+keymap $ LINE_END
+
+# Tab management
+keymap t TAB_LINK
+keymap T NEW_TAB
+keymap d CLOSE_TAB
+keymap gt NEXT_TAB
+keymap gT PREV_TAB
+keymap W TAB_MENU
+
+# Navigation & History
+keymap B BACK
+keymap H HISTORY
+keymap o GOTO
+
+# Bookmarks
+keymap m ADD_BOOKMARK
+keymap M BOOKMARK
+
+# Scrolling
+keymap ^D NEXT_PAGE
+keymap ^U PREV_PAGE
+keymap ^F NEXT_PAGE
+keymap ^B PREV_PAGE
+
+# Quick actions
+keymap r RELOAD
+keymap R RESHAPE
+keymap / SEARCH
+keymap n SEARCH_NEXT
+keymap N SEARCH_PREV
+
+# Link navigation
+keymap [[ PREV_LINK
+keymap ]] NEXT_LINK
+keymap f LIST_MENU

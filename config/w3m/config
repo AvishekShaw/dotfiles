@@ -9,3 +9,70 @@ image_scale 100
 extbrowser open %s
 use_mouse=1
 extbrowser2=/usr/bin/pbcopy
+
+# Color scheme (bat-inspired)
+color 1
+anchor_color green
+image_color yellow
+form_color cyan
+mark_color magenta
+bg_color terminal
+active_color white,green
+active_style 1
+
+# Display enhancements
+display_lineinfo 1
+display_link 1
+display_link_number 1
+display_borders 1
+
+# Better rendering
+fold_line 1
+meta_refresh 1
+tabstep 4
+indent_incr 2
+
+# Performance and usability
+confirm_qq 0
+mark_all_pages 1
+wrap_search 1
+ignorecase_search 1
+vi_prec_num 1
+
+# Smooth scrolling
+smooth_scroll 1
+scroll_margin 10
+
+# Cookie management
+use_cookie 1
+accept_cookie 1
+show_cookie 0
+accept_bad_cookie 0
+
+# Privacy
+sendmail_referer 0
+
+# Download settings
+download_dir ~/Downloads
+
+# Character encoding (UTF-8/Unicode support)
+display_charset UTF-8
+document_charset UTF-8
+system_charset UTF-8
+use_combining 1
+east_asian_width 1
+
+# Better rendering
+empty_line_height 1
+use_mark 1
+
+# Tab behavior
+open_tab_blank 0
+close_tab_back 1
+
+# History and bookmark persistence
+history ~/.w3m/history
+bookmark ~/.w3m/bookmark.html
+savehist 1000
+default_url 1
+mark_all_pages 1
