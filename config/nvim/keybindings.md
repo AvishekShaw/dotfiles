@@ -152,6 +152,10 @@
 | `<leader>or` | Normal | Rename note |
 | `<leader>ol` | Visual | Link to new note |
 | `<leader>oe` | Visual | Extract to new note |
+| `<leader>ofv` | Normal | Follow link in vertical split |
+| `<leader>ofh` | Normal | Follow link in horizontal split |
+| `]o` | Normal | Jump to next link |
+| `[o` | Normal | Jump to previous link |
 | `<leader>ch` | Normal | Toggle checkbox (in markdown) |
 | `gf` | Normal | Follow link under cursor |
 | `<CR>` | Normal | Smart action (follow link/toggle checkbox) |

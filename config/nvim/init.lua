@@ -653,6 +653,20 @@ vim.keymap.set("n", "<leader>or", "<cmd>ObsidianRename<CR>", { desc = "Rename no
 vim.keymap.set("v", "<leader>ol", "<cmd>ObsidianLinkNew<CR>", { desc = "Link to new note" })
 vim.keymap.set("v", "<leader>oe", "<cmd>ObsidianExtractNote<CR>", { desc = "Extract to new note" })
 
+-- Follow link in split
+vim.keymap.set("n", "<leader>ofv", "<cmd>ObsidianFollowLink vsplit<CR>", { desc = "Follow link in vsplit" })
+vim.keymap.set("n", "<leader>ofh", "<cmd>ObsidianFollowLink hsplit<CR>", { desc = "Follow link in hsplit" })
+
+-- Link navigation
+vim.keymap.set("n", "]o", function()
+  vim.cmd("normal! /\\[\\[\\|\\]()")
+  vim.cmd("nohlsearch")
+end, { desc = "Next link" })
+vim.keymap.set("n", "[o", function()
+  vim.cmd("normal! ?\\[\\[\\|\\]()")
+  vim.cmd("nohlsearch")
+end, { desc = "Previous link" })
+
 -- ============================================================================
 -- AUTO COMMANDS
 -- ============================================================================
