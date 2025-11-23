@@ -138,24 +138,26 @@
 
 ## Obsidian Note Taking
 
+**Note:** All Obsidian commands use `<leader>n` prefix (for "notes")
+
 | Key | Mode | Action |
 |-----|------|--------|
-| `<leader>on` | Normal | Create new note |
-| `<leader>oo` | Normal | Quick switch notes |
-| `<leader>os` | Normal | Search notes |
-| `<leader>ot` | Normal | Open today's note |
-| `<leader>oy` | Normal | Open yesterday's note |
-| `<leader>ob` | Normal | Show backlinks |
-| `<leader>ol` | Normal | Show links |
-| `<leader>otg` | Normal | Show tags |
-| `<leader>oT` | Normal | Insert template |
-| `<leader>or` | Normal | Rename note |
-| `<leader>ol` | Visual | Link to new note |
-| `<leader>oe` | Visual | Extract to new note |
-| `<leader>ofv` | Normal | Follow link in vertical split |
-| `<leader>ofh` | Normal | Follow link in horizontal split |
-| `]o` | Normal | Jump to next link |
-| `[o` | Normal | Jump to previous link |
+| `<leader>nn` | Normal | Create new note |
+| `<leader>no` | Normal | Quick switch notes |
+| `<leader>ns` | Normal | Search notes |
+| `<leader>nt` | Normal | Open today's note |
+| `<leader>ny` | Normal | Open yesterday's note |
+| `<leader>nb` | Normal | Show backlinks |
+| `<leader>nl` | Normal | Show links |
+| `<leader>ng` | Normal | Show tags |
+| `<leader>nT` | Normal | Insert template |
+| `<leader>nr` | Normal | Rename note |
+| `<leader>nl` | Visual | Link to new note |
+| `<leader>ne` | Visual | Extract to new note |
+| `<leader>nfv` | Normal | Follow link in vertical split |
+| `<leader>nfh` | Normal | Follow link in horizontal split |
+| `]n` | Normal | Jump to next link |
+| `[n` | Normal | Jump to previous link |
 | `<leader>ch` | Normal | Toggle checkbox (in markdown) |
 | `gf` | Normal | Follow link under cursor |
 | `<CR>` | Normal | Smart action (follow link/toggle checkbox) |
